@@ -1,0 +1,25 @@
+.error-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.emptyMsg {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+    width: 550px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.emptyMsg > p {
+    margin-bottom: 30px;
+}
+
+.emptyMsg > button {
+    width: 250px;
+}

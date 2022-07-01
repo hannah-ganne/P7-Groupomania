@@ -1,0 +1,43 @@
+.main-header {
+    position: fixed;
+    left: 300px;
+    padding: 20px 40px;
+    width: calc(100% - 300px);
+    min-width: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+}
+
+.search-bar {
+    border: none;
+    background: rgba(255, 215, 215, 0.4);
+    border-radius: 50px;
+    height: 45px;
+    padding: 15px 40px;
+    width: 70%;
+}
+
+.search-bar:focus {
+    outline: none;
+}
+
+.sidebar-toggle {
+    width: 25px;
+    visibility: hidden;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 900px) {
+    .main-header {
+        width: 100vw;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .sidebar-toggle {
+        visibility: visible;
+    }
+}
