@@ -1,5 +1,7 @@
 import user from '../assets/user.png'
 import '../utils/style/profile.css'
+import Button from '../components/Button'
+import { Link } from 'react-router-dom'
 
 export default function Profile() {
     return (
@@ -21,8 +23,10 @@ export default function Profile() {
                 <p>I am a <span className='bold uppercase'>dedicated</span> person</p>
                 <span className="bold uppercase">I am up for...</span>
                 <p>Coffee chat, Zoom meeting, Afterwork happy hour, Office parties, Collaborations</p>
-                
             </div>
+            <Link to="/profile/edit">
+                <Button className="btn red" name="Modify profile" />
+            </Link>
         </section>
     )
 }

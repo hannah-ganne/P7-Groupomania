@@ -8,6 +8,7 @@ import Home from './pages/home';
 import Error from './pages/error';
 import Profile from './pages/profile';
 import Feed from './pages/feed';
+import EditProfile from './pages/edit-profile'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,6 +20,7 @@ root.render(
         <Route path="/" element={<Home />} >
           <Route path="/" element={<Feed />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="profile/edit" element={<EditProfile />} />
           <Route path="*" element={<Error />} />
         </Route>
       </Routes>

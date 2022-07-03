@@ -1,6 +1,16 @@
 .profile {
-    padding: 30px 50px;
+    padding: 3em 7em;
     font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile input, .profile select {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    padding: 0.5em;
+    border: 1px solid #F5F5F5;
+    border-radius: 10px;
 }
 
 .profile-title {
@@ -11,11 +21,13 @@
 .profile-info {
     display: flex;
     align-items: center;
+    border-bottom: 3px solid rgba(255, 215, 215, 0.4);
+    padding-bottom: 2em;
 }
 
 .profile-info > img {
-    width: 150px;
-    height: 150px;
+    width: 7em;
+    height: 7em;
     border-radius: 50px;
     margin-right: 3em;
 }
@@ -33,10 +45,15 @@
 
 .profile-detail {
     font-size: 1em;
+    margin-bottom: 1.5em;
 }
 
 .profile-detail > span {
     display: block;
     margin-top: 2em;
     margin-bottom: 0.5em;
+}
+
+.profile button {
+    align-self: center;
 }
