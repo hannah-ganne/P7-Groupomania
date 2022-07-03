@@ -1,0 +1,42 @@
+.profile {
+    padding: 30px 50px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.profile-title {
+    font-size: 2em;
+    margin-bottom: 1em;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+}
+
+.profile-info > img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50px;
+    margin-right: 3em;
+}
+
+.profile-info > div {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.3em;
+}
+
+.profile-info div p {
+    margin-bottom: 0.5em;
+}
+
+
+.profile-detail {
+    font-size: 1em;
+}
+
+.profile-detail > span {
+    display: block;
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+}
