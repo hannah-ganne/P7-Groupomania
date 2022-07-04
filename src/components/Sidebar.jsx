@@ -19,7 +19,7 @@ export default function Sidebar(props) {
             </Link>
             <ul className="sidebar--menu">
                 <li>
-                    <Link to="#">All posts</Link>
+                    <Link to="/">All posts</Link>
                 </li>
             </ul>
             <div className="copyright">© Groupomania All rights reserved.</div>

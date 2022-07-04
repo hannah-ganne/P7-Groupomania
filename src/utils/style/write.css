@@ -1,0 +1,36 @@
+.write {
+    padding: 3em 7em;
+}
+
+.write input:not(input[type="file"]), .write select, .write textarea {
+    border: 1px solid #F5F5F5;
+    border-radius: 10px;
+    font-family: 'Montserrat';
+    font-size: 1rem;
+    line-height: 1.2rem;
+    padding: 1em;
+    margin-bottom: 1em;
+}
+
+.write input:first-of-type {
+    width: 100%;
+}
+
+.write select {
+    display: block;
+}
+
+.write form div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-image-upload {
+    background: rgba(255, 215, 215, 0.4);
+    color: var(--tertiary-color)
+}
