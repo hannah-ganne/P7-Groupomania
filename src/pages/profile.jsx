@@ -1,6 +1,7 @@
 import user from '../assets/user.png'
 import '../utils/style/profile.css'
 import Button from '../components/Button'
+import Avatar from '../components/Avatar'
 import { Link } from 'react-router-dom'
 
 export default function Profile() {
@@ -8,7 +9,7 @@ export default function Profile() {
         <section className="profile">
             <h2 className="profile-title">Profile</h2>
             <div className="profile-info">
-                <img src={user} alt="user avatar"></img>
+                <Avatar />
                 <div>
                     <p><span className="bold">Name: </span>Hannah Ganne</p>
                     <p><span className="bold">Department: </span>IT</p>

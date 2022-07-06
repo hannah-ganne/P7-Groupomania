@@ -5,10 +5,10 @@ import Avatar from './Avatar'
 import Dropdown from './Dropdown'
 
 export default function Header(props) {
-    const [isDropdownShown, setIsDropdownShown] = useState(false)
+    const [headerMenuShown, setheaderMenuShown] = useState(false)
 
     function toggleDropdown() {
-        setIsDropdownShown(prevState => !prevState)
+        setheaderMenuShown(prevState => !prevState)
     }
 
     return (
@@ -16,7 +16,7 @@ export default function Header(props) {
             <img className="sidebar-toggle" src={more} alt="more icon" onClick={props.toggleSidebar}/>
             <input className="search-bar" placeholder="Search forum..."/>
             <Avatar toggleDropdown={toggleDropdown} />
-            <Dropdown className="dropdown bold dark" isShown={isDropdownShown}/>
+            <Dropdown className="dropdown dropdown-header bold dark" isShown={headerMenuShown}/>
         </header>
     )
 }

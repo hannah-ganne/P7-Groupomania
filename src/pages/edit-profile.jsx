@@ -1,4 +1,4 @@
-import user from '../assets/user.png'
+import Avatar from '../components/Avatar'
 import '../utils/style/profile.css'
 import Button from '../components/Button'
 
@@ -7,7 +7,13 @@ export default function EditProfile() {
         <section className="profile">
         <h2 className="profile-title">Profile</h2>
         <div className="profile-info">
-            <img src={user} alt="user avatar"></img>
+            <div className="profile-avatar">
+                <Avatar />
+                <label for="modify-profile" class="btn avatar-btn">
+                    Modify
+                </label>
+                <input type="file" id="modify-profile" accept="image/png, image/jpeg, image/gif" />   
+            </div>     
             <div>
                 <p>
                     <span className="bold">First Name: </span>
@@ -38,7 +44,8 @@ export default function EditProfile() {
             <span className="bold uppercase">Personally I'm interested in...</span>
             <input type="text" placeholder="Parenting advice, yoga"></input>
             <span className="bold uppercase">Describe yourself in one word</span>
-            <div>
+                <div>
+                    
                 <input type="radio" name="oneWord" value="Strategic" />Strategic
                 <input type="radio" name="oneWord" value="Insightful" />Insightful
                 <input type="radio" name="oneWord" value="Determined" />Determined

@@ -3,6 +3,7 @@
     font-family: 'Montserrat', sans-serif;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
 }
 
 .profile input, .profile select {
@@ -19,17 +20,40 @@
 }
 
 .profile-info {
+    width: 100%;
     display: flex;
     align-items: center;
     border-bottom: 3px solid rgba(255, 215, 215, 0.4);
     padding-bottom: 2em;
 }
 
-.profile-info > img {
+.profile-avatar {
+    position: relative;
+}
+
+.profile-avatar:hover .avatar--pic {
+    filter: blur(5px);
+}
+
+.profile-avatar:hover .avatar-btn {
+    visibility: visible;
+}
+
+.profile-avatar .avatar--pic {
     width: 7em;
     height: 7em;
     border-radius: 50px;
     margin-right: 3em;
+}
+
+.avatar-btn {
+    z-index: 10;
+    position: absolute;
+    top: 3.5em;
+    left: 1.2em;
+    padding: 10px 20px;
+    background: rgba(255, 215, 215, 0.4);
+    color: var(--tertiary-color)
 }
 
 .profile-info > div {
@@ -48,10 +72,19 @@
     margin-bottom: 1.5em;
 }
 
+.profile-detail input[type='text']:nth-of-type(1),
+.profile-detail input[type='text']:nth-of-type(2) {
+    width: 100%;
+}
+
 .profile-detail > span {
     display: block;
     margin-top: 2em;
     margin-bottom: 0.5em;
+}
+
+.profile a {
+    align-self: center;
 }
 
 .profile button {
