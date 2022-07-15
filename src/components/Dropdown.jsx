@@ -5,14 +5,18 @@ export default function Dropdown(props) {
     let className
     props.isShown ? 
     className = `${props.className} show-dropdown`
-    : className = props.className
+        : className = props.className
+    
+    function logout() {
+        sessionStorage.clear()
+    }
 
     return (
         <div className={className}>
             <Link to="/profile" className="dropdown--item">
                 Profile
             </Link>
-            <Link to="#" className="dropdown--item">
+            <Link to="/signin" className="dropdown--item" onClick={logout}>
                 Log Out
             </Link>
         </div>
