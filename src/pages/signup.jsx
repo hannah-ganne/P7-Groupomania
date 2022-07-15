@@ -17,6 +17,34 @@ export default function Signup() {
         setSignupData({ ...signupData, [event.target.name]: event.target.value })
     }
 
+    function signinFirstTime() {
+
+        const signinOptions = {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                "email": signupData.email,
+                "password": signupData.password
+            })
+        }
+
+        fetch("http://localhost:3000/api/auth/login", signinOptions)
+        .then(res => {
+            if (res.ok) {
+                return res.json();
+            }
+            throw new Error("There's an error sending the data")
+        })
+            .then(data => {
+            sessionStorage.setItem("token", JSON.stringify(data.token))
+            document.location.href = './profile/edit';
+        })
+        .catch(err => console.log(err))
+}
+
     function handleSubmit(event) {
         event.preventDefault();
 
@@ -37,10 +65,9 @@ export default function Signup() {
             throw new Error("There's an error sending the data")
         })
         .then (data => {
-            document.location.href = "http://localhost:3000/profile/edit";
+            signinFirstTime()
         })
         .catch(err => console.log(err)); 
-    
     }
 
 
