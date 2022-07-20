@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import Avatar from '../components/Avatar'
 import Dropdown from '../components/Dropdown'
 import dots from '../assets/dots.png'
@@ -8,7 +8,26 @@ import image from '../assets/design.jpg'
 import Button from '../components/Button'
 import Comment from '../components/Comment'
 
-export default function Read() {
+export default function Post() {
+
+    const [post, setPost] = useState({})
+
+    useEffect(() => {
+        let { postId } = useParams();
+
+        const fetchOptions = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`,
+            }
+        }
+
+        fetch('http://localhost:3000/api/posts/:postId', fetchOptions)
+        .then(res => res.json())
+        .then(data => setPost(data))
+    }, [])
 
     return (
         <section className="post">
