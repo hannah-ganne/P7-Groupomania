@@ -29,9 +29,9 @@ export default function Profile() {
                 <span className="bold uppercase">Personally I'm interested in...</span>
                 <p>{myProfile.interestedIn}</p>
                 <span className="bold uppercase">Describe yourself in one word</span>
-                <p>I am a(n) <span className='bold uppercase'>{myProfile.oneWord}</span> person</p>
+                <p>I am a <span className='bold uppercase'>{myProfile.oneWord}</span> person</p>
                 <span className="bold uppercase">I am up for...</span>
-                <p>{myProfile.isUpFor}</p>
+                <p></p>
             </div>
             <Link to="/profile/edit">
                 <Button className="btn red" name="Modify profile" />
