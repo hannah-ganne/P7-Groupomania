@@ -22,11 +22,22 @@
     width: 200px;
     margin-top: 40px;
     padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+}
+
+.filter-dept {
+    cursor: pointer;
+}
+
+.filter-dept i {
+    margin-right: 1em;
 }
 
 .sidebar--btn {
     margin-top: 80px;
 }
+
 
 .copyright {
     position: absolute;
