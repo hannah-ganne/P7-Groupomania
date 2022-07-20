@@ -6,7 +6,7 @@ export default function Avatar(props) {
 
     return (
         <div className="avatar" onClick={props.toggleDropdown}>
-            <img className="avatar--pic" src={avatar} alt="avatar"/>
+            <img className="avatar--pic" src={props.imageUrl} alt="avatar"/>
         </div>
     )
 }
