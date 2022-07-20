@@ -1,31 +1,38 @@
 const departments = [
     {
         id: 1,
-        label: 'Finance'
+        label: 'Finance',
+        icon:  'fa-solid fa-hand-holding-dollar'
     },
     {
         id: 2,
-        label: 'HR'
+        label: 'HR',
+        icon: 'fa-solid fa-people-group'
     },
     {
         id: 3,
-        label: 'IT'
+        label: 'IT',
+        icon: 'fa-solid fa-laptop-code'
     },
     {
         id: 4,
-        label: 'Marketing'
+        label: 'Marketing',
+        icon: 'fa-solid fa-store'
     },
     {
         id: 5,
-        label: 'Operations'
+        label: 'Operations',
+        icon: 'fa-solid fa-gears'
     },
     {
         id: 6,
-        label: 'Purchase'
+        label: 'Purchase',
+        icon: 'fa-solid fa-basket-shopping'
     },
     {
         id: 7,
-        label: 'Sales'
+        label: 'Sales',
+        icon: 'fa-solid fa-chart-line'
     }
 ]
 
@@ -160,35 +167,43 @@ const oneWord = [
 const isUpFor = [
     {
         id: 1,
-        label: "Coffee Chat"
+        label: "Coffee Chat",
+        checked: false
     },
     {
         id: 2,
-        label: "Zoom meetings"
+        label: "Zoom meetings",
+        checked: false
     },
     {
         id: 3,
-        label: "Conferences"
+        label: "Conferences",
+        checked: false
     },
     {
         id: 4,
-        label: "Office parties"
+        label: "Office parties",
+        checked: false
     },
     {
         id: 5,
-        label: "Collaborations"
+        label: "Collaborations",
+        checked: false
     },
     {
         id: 6,
-        label: "Afterword happy hour"
+        label: "Afterword happy hour",
+        checked: false
     },
     {
         id: 7,
-        label: "Lunch meeting"
+        label: "Lunch meeting",
+        checked: false
     },
     {
         id: 8,
-        label: "Book club"
+        label: "Book club",
+        checked: false
     }
 ]
 
