@@ -4,9 +4,11 @@ import Button from '../components/Button'
 import { useState, useEffect } from 'react'
 import useFetch from '../utils/hooks/useFetch'
 import { departments, oneWord, isUpFor } from '../docs/list'
+import Checkbox from '../components/Checkbox'
 
 export default function EditProfile() {
     const [myProfile, setMyProfile] = useState({})
+    const [isUpForArray, setIsUpForArray] = useState(isUpFor) 
 
     useFetch("get", "http://localhost:3000/api/auth/viewProfile", setMyProfile)
 
@@ -17,26 +19,51 @@ export default function EditProfile() {
     const oneWordEl = oneWord.map(word => {
         return (
             <div>
-                <input type="radio" key={word.id} id={word.id} name="oneWord" value={word.label} />
-                <label for={word.id}>{word.label}</label>
+                <input type="radio" key={word.id} id={word.id} name="oneWord" value={word.label} checked={myProfile.oneWord === word.label} />
+                <label key={word.label} htmlFor={word.id}>{word.label}</label>
             </div>
         )
     })
 
-    const isUpForEl = isUpFor.map(item => {
-        return (
-            <div>
-                <input type="checkbox" key={item.id} id={item.id} name="isUpFor" value={item.label} />
-                <label for={item.id}>{item.label}</label>
-            </div>
-        )
-    })
-
-    console.log(myProfile)
+    const isUpForEl = isUpForArray.map((item, index) => (
+        <Checkbox
+            key={item.label}
+            isChecked={item.checked}
+            checkHandler={() => handleCheck(index)}
+            label={item.label}
+            index={index}
+        />
+    ))
+    // const isUpForEl = isUpFor.map(item => {
+    //     return (
+    //         <div>
+    //             <input type="checkbox" key={item.id} id={item.id} name="isUpFor" value={item.label} />
+    //             <label key={item.label} htmlFor={item.id}>{item.label}</label>
+    //         </div>
+    //     )
+    // })
 
     function handleChange(event) {
-        setMyProfile({ ...myProfile, [event.target.name]: event.target.value })
+        const name = event.target.name
+        const value = event.target.value
+
+        setMyProfile({ ...myProfile, [name]: value })
     }
+
+    function handleCheck(index) {
+        setIsUpForArray(
+            isUpForArray.map((item, currentIndex) =>
+            currentIndex === index
+                ? { ...item, checked: !item.checked }
+                : item
+            )
+        )
+    }
+
+    useEffect(() => {
+        let checkedItems = isUpForArray.filter(item => item.checked)
+        setMyProfile({ ...myProfile, isUpFor: [...checkedItems] })
+    }, [isUpForArray])
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -64,6 +91,8 @@ export default function EditProfile() {
         .catch(err => console.log(err)); 
     }
 
+    console.log(myProfile)
+
     return (
         <section className="profile">
             <h2 className="profile-title">Profile</h2>
@@ -71,7 +100,7 @@ export default function EditProfile() {
                 <div className="profile-info">
                     <div className="profile-avatar">
                         <Avatar />
-                        <label for="modify-profile" class="btn avatar-btn">
+                        <label htmlFor="modify-profile" className="btn avatar-btn">
                             Modify
                         </label>
                         <input type="file" id="modify-profile" accept="image/png, image/jpeg, image/gif" />   
@@ -107,7 +136,7 @@ export default function EditProfile() {
                         </div>
                     </div>
                     <span className="bold uppercase">I am up for...</span>
-                    <div className="isUpFor" value={myProfile.oneWord} onChange={handleChange}>
+                    <div className="isUpFor">
                         {isUpForEl}
                         <div>
                             <input type="checkbox" name="isUpFor" value="" /><input type="text" placeholder="Enter your idea" />
