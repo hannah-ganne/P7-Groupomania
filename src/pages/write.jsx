@@ -21,7 +21,7 @@ export default function Write() {
                     Please be respectful of your co-workers and use respectful language.
                     If deemed inappropriate, the forum moderator can intervene.</textarea>
                 <div>
-                    <label for="image-upload" class="custom-image-upload btn">
+                    <label forHtml="image-upload" className="custom-image-upload btn">
                         Upload an image
                     </label>
                     <input type="file" id="image-upload" accept="image/png, image/jpeg, image/gif" />
