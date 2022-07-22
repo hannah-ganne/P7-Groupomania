@@ -7,7 +7,8 @@ export default function Feed() {
     const [posts, setPosts] = useOutletContext();
 
     const cardEl = posts.map(post => {
-        return <Card 
+        return <Card
+            key={post.id}    
             id={post.id}
             title={post.title}
             firstName={post.user.firstName}
