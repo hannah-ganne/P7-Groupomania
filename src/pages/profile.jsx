@@ -11,15 +11,7 @@ export default function Profile() {
     // const [myProfile, setMyProfile] = useState({})
     // let result = useFetch("GET", "http://localhost:3000/api/auth/viewProfile", setMyProfile);
 
-    const fetchOptions = {
-        method: "GET",
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`,
-        }
-    }
-    const { data, loading, error } = useFetch('http://localhost:3000/api/auth/viewProfile', fetchOptions)
+    const { data, loading, error } = useFetch('GET', 'http://localhost:3000/api/auth/viewProfile')
     
     if (error) {
         console.log(error)
@@ -54,7 +46,13 @@ export default function Profile() {
                 <span className="bold uppercase">Describe yourself in one word</span>
                 <p>I am {checkVowel()} <span className='bold uppercase'>{data.oneWord}</span> person</p>
                 <span className="bold uppercase">I am up for...</span>
-                    {data.isUpFor.map(item => <p key={item.label}>{item.label}</p>)}
+                    <p>
+                        {data.isUpFor.map((item, index) => {
+                            if (index === data.isUpFor.length - 1) {
+                                return item.label
+                            } else { return item.label + ', ' }
+                        })}
+                    </p>    
             </div>
             <Link to="/profile/edit">
                 <Button className="btn red" name="Modify profile" />
