@@ -12,7 +12,7 @@ export default function Sidebar(props) {
         : className = props.className
     
     const menuEl = departments.map(item => {
-        return <div className="filter-dept" onClick={()=>props.handleFilter(item.label)}>
+        return <div key={item.id} className="filter-dept" onClick={()=>props.handleFilter(item.label)}>
                 <i className={`${item.icon} fa-fw`}></i>
                 {item.label}
                 </div>
@@ -28,7 +28,10 @@ export default function Sidebar(props) {
             </Link>
             <ul className="sidebar--menu">
                 <li>
-                    <Link to="/">All posts</Link>
+                    <Link to="/">
+                        <i className="fa-solid fa-comments"></i>
+                        All posts
+                    </Link>
                     {menuEl}
                 </li>
             </ul>
