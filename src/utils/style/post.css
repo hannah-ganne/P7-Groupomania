@@ -6,10 +6,15 @@
     margin: 0.5em 0;
 }
 
+.post small {
+    font-size: 0.8em;
+}
+
 .post-info-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-family: 'Montserrat', sans-serif
 }
 
 .post-info {
@@ -17,6 +22,7 @@
     justify-content: space-between;
     align-items: center;
 }
+
 
 .post-info > div {
     margin-right: 1em;
@@ -36,7 +42,22 @@
 }
 
 .like {
+    display: flex;
     margin-bottom: 1em;
+}
+
+.like > div {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.like > div:nth-child(2) {
+    margin-left: 1em
+}
+
+.like > div > span {
+    margin-left: 0.5em;
 }
 
 .comment-input {
