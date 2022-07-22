@@ -192,7 +192,7 @@ const isUpFor = [
     },
     {
         id: 6,
-        label: "Afterword happy hour",
+        label: "Afterwork happy hour",
         checked: false
     },
     {
