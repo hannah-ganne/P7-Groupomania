@@ -7,50 +7,58 @@ import { departments, oneWord, isUpFor } from '../docs/list'
 import Checkbox from '../components/Checkbox'
 
 export default function EditProfile() {
-    const [myProfile, setMyProfile] = useState({})
+
+    const { data, error, loading } = useFetch('GET', 'http://localhost:3000/api/auth/viewProfile')
+    const [myProfile, setMyProfile] = useState(data)
     const [isUpForArray, setIsUpForArray] = useState(isUpFor) 
 
-    useFetch("get", "http://localhost:3000/api/auth/viewProfile", setMyProfile)
+    useEffect(() => {
+        let checkedItems = isUpForArray.filter(item => item.checked)
+        setMyProfile({ ...myProfile, isUpFor: [...checkedItems] })
+    }, [isUpForArray])
 
     const deptEl = departments.map(dept => {
         return <option key={dept.id} value={dept.label}>{dept.label}</option>
     })
 
-    const oneWordEl = oneWord.map(word => {
-        return (
-            <div>
-                <input type="radio" key={word.id} id={word.id} name="oneWord" value={word.label} checked={myProfile.oneWord === word.label} />
-                <label key={word.label} htmlFor={word.id}>{word.label}</label>
-            </div>
-        )
-    })
+    // const oneWordEl = oneWord.map(word => {
 
-    const isUpForEl = isUpForArray.map((item, index) => (
-        <Checkbox
-            key={item.label}
-            isChecked={item.checked}
-            checkHandler={() => handleCheck(index)}
-            label={item.label}
-            index={index}
-        />
-    ))
-    // const isUpForEl = isUpFor.map(item => {
     //     return (
     //         <div>
-    //             <input type="checkbox" key={item.id} id={item.id} name="isUpFor" value={item.label} />
-    //             <label key={item.label} htmlFor={item.id}>{item.label}</label>
+    //             <input
+    //                 type="radio"
+    //                 key={word.id}
+    //                 id={word.id}
+    //                 name="oneWord"
+    //                 value={word.label}
+    //             />
+    //             <label
+    //                 key={word.label}
+    //                 htmlFor={word.id}
+    //             >
+    //                 {word.label}
+    //             </label>
     //         </div>
     //     )
     // })
 
+    const isUpForEl = isUpForArray.map((item, index) => {
+        return <Checkbox
+            key={item.label}
+            isChecked={item.checked}
+            checkHandler={() => handleCheckbox(index)}
+            label={item.label}
+            index={index}
+        />
+    })
+
     function handleChange(event) {
-        const name = event.target.name
-        const value = event.target.value
+        const { name, value } = event.target
 
         setMyProfile({ ...myProfile, [name]: value })
     }
 
-    function handleCheck(index) {
+    function handleCheckbox(index) {
         setIsUpForArray(
             isUpForArray.map((item, currentIndex) =>
             currentIndex === index
@@ -59,11 +67,6 @@ export default function EditProfile() {
             )
         )
     }
-
-    useEffect(() => {
-        let checkedItems = isUpForArray.filter(item => item.checked)
-        setMyProfile({ ...myProfile, isUpFor: [...checkedItems] })
-    }, [isUpForArray])
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -91,10 +94,14 @@ export default function EditProfile() {
         .catch(err => console.log(err)); 
     }
 
-    console.log(myProfile)
+    if (error) {
+        console.log(error)
+    }
 
     return (
-        <section className="profile">
+        <>
+        { loading && <div>Loading...</div> }
+        { data && <section className="profile">
             <h2 className="profile-title">Profile</h2>
             <form onSubmit={handleSubmit} >
                 <div className="profile-info">
@@ -108,15 +115,15 @@ export default function EditProfile() {
                     <div>
                         <p>
                             <span className="bold">First Name: </span>
-                            <input type="text" placeholder={myProfile.firstName} name='firstName' value={myProfile.firstName} onChange={handleChange}></input>
+                            <input type="text" placeholder={data.firstName} name='firstName' value={myProfile.firstName} onChange={handleChange}></input>
                         </p>
                         <p>
                             <span className="bold">Last Name: </span>
-                            <input type="text" placeholder={myProfile.lastName} name='lastName' value={myProfile.lastName} onChange={handleChange}></input>
+                            <input type="text" placeholder={data.lastName} name='lastName' value={myProfile.lastName} onChange={handleChange}></input>
                         </p>
                         <p>
                                 <span className="bold">Department: </span>
-                                <select name="department" value={myProfile.department} onChange={handleChange}>
+                                <select name="department" value={data.department} onChange={handleChange}>
                                     <option value="">Choose your department</option>
                                     {deptEl}
                                 </select>
@@ -125,26 +132,56 @@ export default function EditProfile() {
                 </div>
                 <div className="profile-detail">
                     <span className="bold uppercase">At work I'm expert in...</span>
-                    <input type="text" placeholder={myProfile.expertIn} name='expertIn' value={myProfile.expertIn} onChange={handleChange}></input>
+                        <input
+                            type="text"
+                            placeholder={data.expertIn}
+                            name='expertIn'
+                            value={myProfile.expertIn}
+                            onChange={handleChange}>
+                        </input>
+                        
                     <span className="bold uppercase">Personally I'm interested in...</span>
-                    <input type="text" placeholder={myProfile.interestedIn} name='interestedIn' value={myProfile.interestedIn} onChange={handleChange}></input>
+                        <input
+                            type="text"
+                            placeholder={data.interestedIn}
+                            name='interestedIn'
+                            value={myProfile.interestedIn}
+                            onChange={handleChange}>
+                        </input>
+
                     <span className="bold uppercase">Describe yourself in one word</span>
                     <div className="oneWord" value={myProfile.oneWord} onChange={handleChange}>
-                        {oneWordEl}
-                        <div>
-                            <input type="radio" name="oneWord" value="" /><input type="text" placeholder="Enter a word" />
-                        </div>
+                        {oneWord.map(word => {
+                            return (
+                                <div key={word.id}>
+                                    <input
+                                        type="radio"
+                                        key={word.id}
+                                        id={word.id}
+                                        name="oneWord"
+                                        value={word.label}
+                                    />
+                                    <label
+                                        key={word.label}
+                                        htmlFor={word.id}
+                                    >
+                                        {word.label}
+                                    </label>
+                                </div>
+                            )
+                            })}
                     </div>
+                        
                     <span className="bold uppercase">I am up for...</span>
                     <div className="isUpFor">
                         {isUpForEl}
-                        <div>
-                            <input type="checkbox" name="isUpFor" value="" /><input type="text" placeholder="Enter your idea" />
-                        </div>
                     </div>
                 </div>
                 <Button className="btn red" name="Confirm changes" type="submit" /> 
             </form>
     </section>
+    }
+        </>
     )
+
 }
