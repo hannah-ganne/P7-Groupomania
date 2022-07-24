@@ -1,42 +1,50 @@
-const departments = [
+import PriceCheckIcon from '@mui/icons-material/PriceCheck';
+import PeopleIcon from '@mui/icons-material/People';
+import ComputerIcon from '@mui/icons-material/Computer';
+import StoreIcon from '@mui/icons-material/Store';
+import WorkIcon from '@mui/icons-material/Work';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+
+export const departments = [
     {
         id: 1,
         label: 'Finance',
-        icon:  'fa-solid fa-hand-holding-dollar'
+        icon:  (<PriceCheckIcon />)
     },
     {
         id: 2,
         label: 'HR',
-        icon: 'fa-solid fa-people-group'
+        icon: (<PeopleIcon />)
     },
     {
         id: 3,
         label: 'IT',
-        icon: 'fa-solid fa-laptop-code'
+        icon: (<ComputerIcon />)
     },
     {
         id: 4,
         label: 'Marketing',
-        icon: 'fa-solid fa-store'
+        icon: (<StoreIcon />)
     },
     {
         id: 5,
         label: 'Operations',
-        icon: 'fa-solid fa-gears'
+        icon: (<WorkIcon />)
     },
     {
         id: 6,
         label: 'Purchase',
-        icon: 'fa-solid fa-basket-shopping'
+        icon: (<ShoppingCartIcon />)
     },
     {
         id: 7,
         label: 'Sales',
-        icon: 'fa-solid fa-chart-line'
+        icon: (<TrendingUpIcon />)
     }
 ]
 
-const topics = [
+export const topics = [
 
     {
         id:1,
@@ -101,7 +109,7 @@ const topics = [
 ]
 
 
-const oneWord = [
+export const oneWord = [
     {
         id:1,
         label:"Strategic"
@@ -164,7 +172,7 @@ const oneWord = [
     }
     ]
 
-const isUpFor = [
+export const isUpFor = [
     {
         id: 1,
         label: "Coffee Chat",
@@ -206,6 +214,3 @@ const isUpFor = [
         checked: false
     }
 ]
-
-module.exports = { departments, topics, oneWord, isUpFor }
-
