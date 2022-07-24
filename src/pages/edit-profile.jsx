@@ -90,7 +90,7 @@ export default function EditProfile() {
                         <label htmlFor="modify-profile" className="btn avatar-btn">
                             Modify
                         </label>
-                        <input type="file" id="modify-profile" accept="image/png, image/jpeg, image/gif" />   
+                        <input type="file" id="modify-profile" accept="image/png, image/jpeg, image/gif" hidden/>   
                     </div>     
                     <div>
                         <p>
