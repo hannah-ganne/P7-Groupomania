@@ -1,12 +1,13 @@
-import Avatar from './Avatar'
+// import Avatar from './Avatar'
 import Tag from './Tag'
 import '../utils/style/Card.css'
 import { Link } from 'react-router-dom'
+import Avatar from '@mui/material/Avatar'
 
 export default function Card({id, title, firstName, department, imageUrl, createdAt, description, topic, likesCount, commentsCount}) {
     return (
         <article>
-            <Avatar imageUrl={imageUrl} />
+            <Avatar sx={{ width: 75, height: 75 }}>HG</Avatar>
             <div className="item--text">
                 <Link to={`/post/${id}`}>
                     <h3>{title}</h3>
