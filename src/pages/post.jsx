@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 // import Avatar from '../components/Avatar'
 import Avatar from '@mui/material/Avatar'
 import DropdownMenu from '../components/DropdownMenu'
@@ -25,6 +25,30 @@ export default function Post() {
         console.log(error)
     } 
 
+    function deletePost() {
+
+        const fetchOptions = {
+            method: "DELETE",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
+            }
+        }
+
+        fetch (`http://localhost:3000/api/posts/${id}`, fetchOptions)
+        .then (res =>  {
+            if(res.ok) {
+                return res.json();
+            }
+            throw new Error("There's an error sending the data")
+        })
+        .then (data => {
+            document.location.href = './';
+        })
+        .catch(err => console.log(err)); 
+    }
+
     return (
         <>
             {loading && <div>Loading...</div>}
@@ -37,8 +61,10 @@ export default function Post() {
                     button={(<Avatar />)}
                     menuIcon1={(<AccountCircleIcon />)} 
                     menuName1='View profile'
+                    menuLink1='/profile'
                     menuIcon2={(<EmailIcon />)}
                     menuName2='Send email'
+                    menuLink2='#'
                 />
                 <p>by <span className="bold">{data.post.user.firstName}</span> from <span className="bold">{data.post.user.department}</span> on {data.post.createdAt.slice(0,10)}</p>
                 </div>
@@ -46,8 +72,11 @@ export default function Post() {
                     button={(<MoreVertIcon />)}
                     menuIcon1={(<EditIcon />)} 
                     menuName1='Edit post'
+                    menuLink1='./edit'
                     menuIcon2={(<DeleteIcon />)}
                     menuName2='Delete post'
+                    menuOnClick2={deletePost}
+                    menuLink2='/'
                 />       
             </div>
             <div className="post-contents">
@@ -71,7 +100,7 @@ export default function Post() {
                     <Button className="btn red" name="send" />
                 </div>
                     {data.post.comments.map(comment => {
-                    return <Comment userName={comment.user.firstName} comment={comment.comment} imageUrl={comment.user.imageUrl} />
+                    return <Comment key={comment.id} userName={comment.user.firstName} comment={comment.comment} imageUrl={comment.user.imageUrl} />
                 })}
             </div>
         </section>}
