@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 // import '../utils/style/components.css'
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
@@ -65,7 +65,10 @@ export default function Dropdown(props) {
             >
             
             <MenuItem
-                sx={{ fontFamily: 'Lato' }} 
+                sx={{ fontFamily: 'Lato' }}
+                component={Link}
+                onClick={props.menuOnClick1}
+                to={props.menuLink1}    
             >
                 <ListItemIcon>
                     {props.menuIcon1}
@@ -74,6 +77,10 @@ export default function Dropdown(props) {
             </MenuItem>
             <MenuItem
                 sx={{ fontFamily: 'Lato' }}
+                component={Link}
+                onClick={props.menuOnClick2}
+                to={props.menuLink2}    
+                    
             >
                 <ListItemIcon>
                     {props.menuIcon2}
