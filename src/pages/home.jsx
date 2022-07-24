@@ -44,9 +44,7 @@ export default function Home() {
             .then(res => res.json())
             .then(data => setPosts(data))
     }
-
-    console.log(posts)
-
+    
     return (
         <>
             <Sidebar className="sidebar" isSidebarShown={isSidebarShown} handleFilter={handleFilter} />

@@ -1,4 +1,5 @@
 import Avatar from '../components/Avatar'
+// import Avatar from '@mui/material/Avatar'
 import '../utils/style/profile.css'
 import Button from '../components/Button'
 import { useState, useEffect } from 'react'
@@ -20,27 +21,6 @@ export default function EditProfile() {
     const deptEl = departments.map(dept => {
         return <option key={dept.id} value={dept.label}>{dept.label}</option>
     })
-
-    // const oneWordEl = oneWord.map(word => {
-
-    //     return (
-    //         <div>
-    //             <input
-    //                 type="radio"
-    //                 key={word.id}
-    //                 id={word.id}
-    //                 name="oneWord"
-    //                 value={word.label}
-    //             />
-    //             <label
-    //                 key={word.label}
-    //                 htmlFor={word.id}
-    //             >
-    //                 {word.label}
-    //             </label>
-    //         </div>
-    //     )
-    // })
 
     const isUpForEl = isUpForArray.map((item, index) => {
         return <Checkbox
