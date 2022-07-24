@@ -11,12 +11,15 @@ article {
     width: 60%;
 }
 
-.item--text > h3 {
+.item--text a h3 {
     margin-bottom: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
 }
 
 .item--text--data {
     margin-bottom: 10px;
+    font-size: 20px;
 }
 
 .item--stats {
