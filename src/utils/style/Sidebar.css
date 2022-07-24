@@ -26,17 +26,23 @@
     font-weight: bold;
 }
 
-.sidebar--menu a i {
-    margin-right: 1em;
+.sidebar--menu a {
+    display: flex;
+    align-items: center;
+}
+.sidebar--menu a svg {
+    margin-right: 0.5em;
 }
 
 .filter-dept {
     cursor: pointer;
     margin: 1em 0;
+    display: flex;
+    align-items: center;
 }
 
-.filter-dept i {
-    margin-right: 1em;
+.filter-dept svg {
+    margin-right: 0.5em;
 }
 
 .sidebar > a:nth-child(2)  {
