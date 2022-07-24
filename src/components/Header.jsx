@@ -51,7 +51,7 @@ export default function Header(props) {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
             >
-            <Avatar sx={{ width: 50, height: 50 }}>HG</Avatar>
+            <Avatar sx={{ width: 50, height: 50 }}/>
             </IconButton>
             <Menu
                 anchorEl={anchorEl}
@@ -95,7 +95,12 @@ export default function Header(props) {
                     to='/profile'>
                     <Avatar /> Profile
                 </MenuItem>
-                <MenuItem sx={{fontFamily: 'Lato'}}>
+                <MenuItem
+                    sx={{ fontFamily: 'Lato' }}
+                    component={Link}
+                    onClick={() => sessionStorage.clear()}
+                    to='/signin'
+                >
                     <ListItemIcon>
                         <Logout fontSize="small" />
                     </ListItemIcon>
