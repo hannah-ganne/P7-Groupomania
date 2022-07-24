@@ -1,15 +1,17 @@
-import Avatar from './Avatar'
+// import Avatar from './Avatar'
+import Avatar from '@mui/material/Avatar'
 import deleteIcon from '../assets/delete.png'
+import DeleteIcon from '@mui/icons-material/Delete';
 
-export default function Comment() {
+export default function Comment(props) {
     return (
         <div className="comment">
             <div>
             <Avatar />
-            <span className='bold'>Hannah</span>
-            <p>Amazing post, Sarah! I'll try to apply this to my work for sure.</p>
+            <span className='bold'>{props.userName}</span>
+            <p>{props.comment}</p>
             </div>
-            <img className="delete-icon" src={deleteIcon} alt="trashcan icon" />
+            <DeleteIcon className='delete-icon' fontSize='medium'/>
         </div>
     )
 }
