@@ -4,6 +4,7 @@ import '../utils/style/Sidebar.css'
 import { Link } from 'react-router-dom'
 import { departments } from '../docs/list'
 import { useFetch } from '../utils/hooks/useFetch'
+import ForumIcon from '@mui/icons-material/Forum';
 
 export default function Sidebar(props) {
     let className
@@ -12,8 +13,9 @@ export default function Sidebar(props) {
         : className = props.className
     
     const menuEl = departments.map(item => {
-        return <div key={item.id} className="filter-dept" onClick={()=>props.handleFilter(item.label)}>
-                <i className={`${item.icon} fa-fw`}></i>
+        return <div key={item.id} className="filter-dept" onClick={() => props.handleFilter(item.label)}>
+                {item.icon}
+                {/* <i className={`${item.icon} fa-fw`}></i> */}
                 {item.label}
                 </div>
     })
@@ -29,7 +31,7 @@ export default function Sidebar(props) {
             <ul className="sidebar--menu">
                 <li>
                     <Link to="/">
-                        <i className="fa-solid fa-comments"></i>
+                        <ForumIcon />
                         All posts
                     </Link>
                     {menuEl}
