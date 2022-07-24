@@ -1,7 +1,9 @@
 import user from '../assets/user.png'
 import '../utils/style/profile.css'
 import Button from '../components/Button'
-import Avatar from '../components/Avatar'
+import Avatar from '@mui/material/Avatar'
+// import Avatar from '../components/Avatar'
+
 import { Link } from 'react-router-dom'
 import useFetch from '../utils/hooks/useFetch'
 import { useState } from 'react'
@@ -31,7 +33,13 @@ export default function Profile() {
             <h2 className="profile-title">Profile</h2>
             <div className="profile-info">
                 <div className="profile-avatar-readonly">
-                    <Avatar />
+                    <Avatar
+                        sx={{
+                            width: 120,
+                            height: 120,
+                            mr: 5
+                            }}
+                    />
                 </div>    
                 <div>
                     <p><span className="bold">Name: </span>{`${data.firstName} ${data.lastName}`}</p>
