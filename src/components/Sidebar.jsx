@@ -13,8 +13,8 @@ export default function Sidebar(props) {
         : className = props.className
     
     const menuEl = departments.map(item => {
-        return <Link onClick={() => props.handleFilter(item.label)} to='/'>
-                    <div key={item.id} className="filter-dept">
+        return <Link key={item.id} className="filter-dept" onClick={() => props.handleFilter(item.label)} to='/'>
+                    <div key={item.id} >
                     {item.icon}
                     {/* <i className={`${item.icon} fa-fw`}></i> */}
                     {item.label}
