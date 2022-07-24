@@ -13,11 +13,13 @@ export default function Sidebar(props) {
         : className = props.className
     
     const menuEl = departments.map(item => {
-        return <div key={item.id} className="filter-dept" onClick={() => props.handleFilter(item.label)}>
-                {item.icon}
-                {/* <i className={`${item.icon} fa-fw`}></i> */}
-                {item.label}
-                </div>
+        return <Link onClick={() => props.handleFilter(item.label)} to='/'>
+                    <div key={item.id} className="filter-dept">
+                    {item.icon}
+                    {/* <i className={`${item.icon} fa-fw`}></i> */}
+                    {item.label}
+                    </div>
+                </Link>
     })
 
     return (
