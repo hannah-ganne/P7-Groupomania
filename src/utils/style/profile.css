@@ -31,7 +31,7 @@
     position: relative;
 }
 
-.profile-avatar:hover .avatar--pic {
+.profile-avatar:hover .profile-avatar:first-child {
     filter: blur(5px);
 }
 
