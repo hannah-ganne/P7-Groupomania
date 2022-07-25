@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
-import Feed from '../pages/feed'
 import { Outlet } from 'react-router-dom'
 import useFetch from '../utils/hooks/useFetch'
 
@@ -31,7 +30,6 @@ export default function Home() {
     function handleFilter(department) {
 
         const fetchOptions = {
-            method: "GET",
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",

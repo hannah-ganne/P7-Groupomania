@@ -22,7 +22,6 @@ export default function useFetch(method, url, body = null) {
             .then(data => {
                 setData(data);
                 setLoading(false);
-                console.log(data)
             })
             .catch(err => {
                 setError(err);

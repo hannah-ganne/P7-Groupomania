@@ -23,8 +23,6 @@ export default function Profile() {
         const vowels = ['A', 'E', 'I', 'O', 'U']
         return vowels.includes(data.oneWord.slice(0, 1)) ? 'an' : 'a'
     } 
-
-    console.log(data)
     
     return (
         <>
@@ -39,6 +37,7 @@ export default function Profile() {
                             height: 120,
                             mr: 5
                             }}
+                        src={data.imageUrl}
                     />
                 </div>    
                 <div>
