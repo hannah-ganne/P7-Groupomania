@@ -7,7 +7,7 @@ export default function Comment(props) {
     return (
         <div className="comment">
             <div>
-            <Avatar />
+            <Avatar src={props.imageUrl} />
             <span className='bold'>{props.userName}</span>
             <p>{props.comment}</p>
             </div>
