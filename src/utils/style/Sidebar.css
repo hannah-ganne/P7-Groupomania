@@ -37,6 +37,9 @@
 .filter-dept {
     cursor: pointer;
     margin: 1em 0;
+}
+
+.filter-dept > div {
     display: flex;
     align-items: center;
 }
