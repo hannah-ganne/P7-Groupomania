@@ -18,6 +18,11 @@
     color: var(--primary-color)
 }
 
+.pink {
+    background-color: var(--secondary-color);
+    color: var(--tertiary-color)
+}
+
 .tag {
     border: 1px solid var(--primary-color);
     border-radius: 50px;
