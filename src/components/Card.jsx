@@ -4,7 +4,11 @@ import '../utils/style/Card.css'
 import { Link } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar'
 
-export default function Card({id, title, firstName, department, imageUrl, createdAt, description, topic, likesCount, commentsCount}) {
+export default function Card({ id, title, firstName, department, imageUrl, createdAt, description, topic, likesCount, commentsCount }) {
+
+    const date = new Date(createdAt)
+    const dateCreated = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear()
+
     return (
         <article>
             <Avatar sx={{ width: 75, height: 75 }} src={imageUrl} />
@@ -12,7 +16,7 @@ export default function Card({id, title, firstName, department, imageUrl, create
                 <Link to={`/post/${id}`}>
                     <h3>{title}</h3>
                     <p className="item--text--data">
-                        <span className="bold">{firstName}</span> from <span className="bold">{department}</span> started 1 day ago
+                        <span className="bold">{firstName}</span> from <span className="bold">{department}</span> started on {dateCreated}
                     </p>
                     <p>{description}</p>
                 </Link>
