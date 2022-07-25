@@ -110,6 +110,19 @@ form {
     margin-right: 0.5em;
 }
 
+.delete-account p {
+    margin-top: 2em;
+    color: var(--primary-color);
+}
+
+.btns {
+    margin: auto;
+    margin-top: 2em;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+}
+
 .profile form button {
     align-self: center;
 }
