@@ -32,8 +32,14 @@
     height: 20px;
 }
 
+.post-contents {
+    display: flex;
+    flex-direction: column;
+}
+
 .post-contents > img {
-    width: 100%;
+    align-self: center;
+    max-height: 500px;
     margin-top: 1em;
 }
 
@@ -61,7 +67,8 @@
 }
 
 .comment-input {
-    display: flex;
+    display: flex;  
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
