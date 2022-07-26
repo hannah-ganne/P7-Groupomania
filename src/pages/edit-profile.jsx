@@ -13,51 +13,46 @@ import Modal from '@mui/material/Modal';
 
 export default function EditProfile() {
 
-    const { data, error, loading } = useFetch('GET', 'http://localhost:3000/api/auth/viewProfile')
-    const [myProfile, setMyProfile] = useState({})
+    const { data, setData, error, loading } = useFetch('GET', 'http://localhost:3000/api/auth/viewProfile')
+
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
-    useEffect(() => {
-        setMyProfile(data)
-    }, [data])
     
-    const [isUpForArray, setIsUpForArray] = useState(isUpFor) 
-
-    useEffect(() => {
-        let checkedItems = isUpForArray.filter(item => item.checked)
-        setMyProfile({ ...myProfile, isUpFor: [...checkedItems] })
-    }, [isUpForArray])
-
     const deptEl = departments.map(dept => {
         return <option key={dept.id} value={dept.label}>{dept.label}</option>
     })
 
-    const isUpForEl = isUpForArray.map((item, index) => {
-        return <Checkbox
-            key={item.label}
-            isChecked={item.checked}
-            checkHandler={() => handleCheckbox(index)}
-            label={item.label}
-            index={index}
-        />
-    })
+    // const isUpForEl = isUpForArray.map((item, index) => {
+    //     console.log(data)
+
+    //     return <Checkbox
+    //         key={item.label}
+    //         isChecked={item.checked}
+    //         checkHandler={() => handleCheckbox(index)}
+    //         label={item.label}
+    //         index={index}
+    //     />
+    // })
 
     function handleChange(event) {
         const { name, value } = event.target
 
-        setMyProfile({ ...myProfile, [name]: value })
+        setData({ ...data, [name]: value })
     }
 
     function handleCheckbox(index) {
-        setIsUpForArray(
-            isUpForArray.map((item, currentIndex) =>
-            currentIndex === index
-                ? { ...item, checked: !item.checked }
-                : item
-            )
+        const isUpForArray = data.isUpFor.map((item, currentIndex) =>
+        currentIndex === index
+            ? { ...item, checked: !item.checked }
+            : item
         )
+
+        setData(
+            {...data, isUpFor: isUpForArray}
+        )
+
+        console.log(data)
     }
 
     function deleteAccount() {
@@ -146,7 +141,7 @@ export default function EditProfile() {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
             },
-            body: JSON.stringify(myProfile)
+            body: JSON.stringify(data)
         }
 
         fetch ('http://localhost:3000/api/auth/setProfile', fetchOptions)
@@ -166,7 +161,6 @@ export default function EditProfile() {
         console.log(error)
     }
 
-
     return (
         <>
         { loading && <div>Loading...</div> }
@@ -184,11 +178,11 @@ export default function EditProfile() {
                     <div>
                         <p>
                             <span className='bold'>First Name: </span>
-                            <input type='text' placeholder={data.firstName} name='firstName' value={myProfile.firstName} onChange={handleChange}></input>
+                            <input type='text' placeholder={data.firstName} name='firstName' value={data.firstName} onChange={handleChange}></input>
                         </p>
                         <p>
                             <span className='bold'>Last Name: </span>
-                            <input type='text' placeholder={data.lastName} name='lastName' value={myProfile.lastName} onChange={handleChange}></input>
+                            <input type='text' placeholder={data.lastName} name='lastName' value={data.lastName} onChange={handleChange}></input>
                         </p>
                         <p>
                                 <span className='bold'>Department: </span>
@@ -205,7 +199,7 @@ export default function EditProfile() {
                             type='text'
                             placeholder={data.expertIn}
                             name='expertIn'
-                            value={myProfile.expertIn}
+                            value={data.expertIn}
                             onChange={handleChange}>
                         </input>
                         
@@ -214,12 +208,12 @@ export default function EditProfile() {
                             type='text'
                             placeholder={data.interestedIn}
                             name='interestedIn'
-                            value={myProfile.interestedIn}
+                            value={data.interestedIn}
                             onChange={handleChange}>
                         </input>
 
                     <span className='bold uppercase'>Describe yourself in one word</span>
-                    <div className='oneWord' value={myProfile.oneWord} onChange={handleChange}>
+                    <div className='oneWord' value={data.oneWord} onChange={handleChange}>
                             {oneWord.map(word => {
                             return (
                                 <div key={word.id}>
@@ -229,6 +223,7 @@ export default function EditProfile() {
                                         id={word.id}
                                         name='oneWord'
                                         value={word.label}
+                                        checked={word.label === data.oneWord}
                                     />
                                     <label
                                         key={word.label}
@@ -243,7 +238,15 @@ export default function EditProfile() {
                         
                     <span className='bold uppercase'>I am up for...</span>
                     <div className='isUpFor'>
-                        {isUpForEl}
+                        {data.isUpFor.map((item, index) => {
+                            return <Checkbox
+                                key={item.label}
+                                isChecked={item.checked}
+                                checkHandler={() => handleCheckbox(index)}
+                                label={item.label}
+                                index={index}
+                            />
+                        })}
                     </div>
                     <Link className='delete-account font-red bold' to='#' onClick={handleOpen}>
                         <p>Delete my account</p>

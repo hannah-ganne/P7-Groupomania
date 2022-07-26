@@ -54,11 +54,14 @@ export default function Profile() {
                 <p>I am {checkVowel()} <span className='bold uppercase'>{data.oneWord}</span> person</p>
                 <span className="bold uppercase">I am up for...</span>
                     <p>
-                        {data.isUpFor.map((item, index) => {
+                        {data.isUpFor
+                            .filter(item => item.checked)
+                            .map((item, index) => {
                             if (index === data.isUpFor.length - 1) {
                                 return item.label
                             } else { return item.label + ', ' }
-                        })}
+                        })
+                        }
                     </p>    
             </div>
             <Link to="/profile/edit">

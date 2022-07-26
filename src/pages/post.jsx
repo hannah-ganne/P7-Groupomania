@@ -83,6 +83,8 @@ export default function Post() {
         .catch(err => console.log(err)); 
     }
 
+    console.log(data.post.user)
+
 
     return (
         <>
@@ -118,7 +120,8 @@ export default function Post() {
                     expertIn={data.post.user.expertIn}
                     interestedIn={data.post.user.interestedIn}
                     oneWord={data.post.user.oneWord}
-                    isUpFor={data.post.user.isUpFor}
+                    isUpFor={data.post.user.isUpFor
+                            .filter(item => item.checked)}
                 />
                 <p>by <span className='bold'>{data.post.user.firstName}</span> from <span className='bold'>{data.post.user.department}</span> on {new Date(data.post.createdAt).getDate() + '/' + new Date(data.post.createdAt).getMonth() + '/' + new Date(data.post.createdAt).getFullYear()}</p>
                 </div>
