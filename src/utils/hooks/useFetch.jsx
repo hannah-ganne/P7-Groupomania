@@ -29,7 +29,7 @@ export default function useFetch(method, url, body = null) {
             })
     }, []);
 
-    return { data, loading, error };
+    return { data, setData, loading, error };
 };
 // import { useState, useEffect } from 'react'
 
