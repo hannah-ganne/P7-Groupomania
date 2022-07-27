@@ -2,7 +2,7 @@ section {
     position: fixed;
     left: 300px;
     top: 93.5px;
-    padding: 20px 40px;
+    padding: 3% 7%;
     width: calc(100% - 300px);
     height: calc(100% - 93.5px);
     overflow-y: scroll;
