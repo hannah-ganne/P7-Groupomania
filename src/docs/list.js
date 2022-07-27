@@ -175,7 +175,7 @@ export const oneWord = [
 export const isUpFor = [
     {
         id: 1,
-        label: "Coffee Chat",
+        label: "Coffee chat",
         checked: false
     },
     {
