@@ -25,11 +25,12 @@ export default function Write() {
     function handleSubmit(event) {
         event.preventDefault();
 
+        let input = document.getElementById('image-upload')
         let formData = new FormData();
         formData.append("title", myPost.title);
         formData.append("topic", myPost.topic);
         formData.append("description", myPost.description);
-        formData.append("file", selectedFile);
+        formData.append("image", input.files[0]);
 
         const fetchOptions = {
             method: "POST",
@@ -53,8 +54,6 @@ export default function Write() {
         })
         .catch(err => console.log(err)); 
     }
-
-    console.log(myPost)
 
     return (
         <section className='write'>
@@ -81,10 +80,10 @@ export default function Write() {
                     <input
                         type="file"
                         id="image-upload"
+                        name="image"
                         accept="image/png, image/jpeg, image/gif"
-                        value=""
-                        onChange={(e) => setSelectedFile(e.target.files[0])}
-                        hidden
+                        // value=""
+                        // onChange={(e) => setSelectedFile(e.target.files[0])}
                     />
                     <Button className="btn red" name="Post" type="submit" />
                 </div>
