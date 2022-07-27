@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 export default function Feed() {
 
     const [posts, setPosts] = useOutletContext();
-    const [sortType, setSortType] = useState();
+    const [sortType, setSortType] = useState(0);
 
     useEffect(() => {
         const fetchOptions = {
@@ -15,11 +15,10 @@ export default function Feed() {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
-            },
-            body: sortType
+            }
         }
 
-        fetch ('http://localhost:3000/api/posts', fetchOptions)
+        fetch (`http://localhost:3000/api/posts/all/${sortType}`, fetchOptions)
         .then (res =>  {
             if(res.ok) {
                 return res.json();
