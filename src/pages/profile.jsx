@@ -23,6 +23,10 @@ export default function Profile() {
         const vowels = ['A', 'E', 'I', 'O', 'U']
         return vowels.includes(data.oneWord.slice(0, 1)) ? 'an' : 'a'
     } 
+
+    const suggestion = (
+        <p>Please complete your profile</p>
+    )
     
     return (
         <>
@@ -47,11 +51,11 @@ export default function Profile() {
             </div>
             <div className="profile-detail">
                 <span className="bold uppercase">At work I'm expert in...</span>
-                <p>{data.expertIn}</p>
+                    {!data.expertIn ? suggestion : <p>{data.expertIn}</p>}
                 <span className="bold uppercase">Personally I'm interested in...</span>
-                <p>{data.interestedIn}</p>
+                    {!data.interestedIn ? suggestion : <p>{data.interestedIn}</p>}
                 <span className="bold uppercase">Describe yourself in one word</span>
-                <p>I am {checkVowel()} <span className='bold uppercase'>{data.oneWord}</span> person</p>
+                    {!data.oneWord ? suggestion : <p>I am {(checkVowel())} <span className='bold uppercase'>{data.oneWord}</span> person</p>}
                 <span className="bold uppercase">I am up for...</span>
                     <p>
                         {data.isUpFor
