@@ -1,24 +1,23 @@
 import '../utils/style/Header.css'
 import { useState } from 'react'
-import more from '../assets/more.png'
 // import Avatar from './Avatar'
 import Avatar from '@mui/material/Avatar'
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
+import MenuIcon from '@mui/icons-material/Menu';
 import Logout from '@mui/icons-material/Logout';
 import Input from '@mui/material/Input';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import useFetch from '../utils/hooks/useFetch'
 
 export default function Header(props) {
-    // const [headerMenuShown, setheaderMenuShown] = useState(false)
 
-    // function toggleDropdown() {
-    //     setheaderMenuShown(prevState => !prevState)
-    // }
+    const { data, loading, error } = useFetch('GET', 'http://localhost:3000/api/auth/viewProfile')
+
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -27,87 +26,103 @@ export default function Header(props) {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    if (error) {
+        console.log(error)
+    }
     
     return (
+    <>
+        { loading && <div>Loading...</div>}
+        {data &&
         <header className="main-header">
-            <img className="sidebar-toggle" src={more} alt="more icon" onClick={props.toggleSidebar}/>
-            {/* <input className="search-bar" placeholder="Search forum..." /> */}
-            <Input
-                startAdornment={
-                    <InputAdornment position="start">
-                        <SearchIcon />
-                    </InputAdornment>
-                }
-                placeholder='Search forum...'
-                sx={{
-                    fontFamily: 'Lato',
-                }}
-            />
             <IconButton
-            onClick={handleClick}
-            size="small"
-            sx={{ ml: 2 }}
-            aria-controls={open ? 'account-menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={props.handleDrawerToggle}
+            sx={{ mr: 2, display: { md: 'none' } }}
             >
-            <Avatar sx={{ width: 50, height: 50 }}/>
-            </IconButton>
-            <Menu
-                anchorEl={anchorEl}
-                id="account-menu"
-                open={open}
-                onClose={handleClose}
-                onClick={handleClose}
-                PaperProps={{
-                elevation: 0,
-                sx: {
-                    overflow: 'visible',
-                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                    mt: 1.5,
-                    '& .MuiAvatar-root': {
-                    width: 32,
-                    height: 32,
-                    ml: -0.5,
-                    mr: 1,
-                    },
-                    '&:before': {
-                    content: '""',
-                    display: 'block',
-                    position: 'absolute',
-                    top: 0,
-                    right: 14,
-                    width: 10,
-                    height: 10,
-                    bgcolor: 'background.paper',
-                    transform: 'translateY(-50%) rotate(45deg)',
-                    zIndex: 0,
-                    },
-                },
-                }}
-                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+            <MenuIcon className="sidebar-toggle" />
+            </IconButton> 
+                <Input
+                    startAdornment={
+                        <InputAdornment position="start">
+                            <SearchIcon />
+                        </InputAdornment>
+                    }
+                    placeholder='Search forum...'
+                    sx={{
+                        fontFamily: 'Lato',
+                    }}
+                />
+                <IconButton
+                    onClick={handleClick}
+                    size="small"
+                    sx={{ ml: 2 }}
+                    aria-controls={open ? 'account-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
                 >
-                
-                <MenuItem
-                    sx={{fontFamily: 'Lato'}}
-                    component={Link}
-                    to='/profile'>
-                    <Avatar /> Profile
-                </MenuItem>
-                <MenuItem
-                    sx={{ fontFamily: 'Lato' }}
-                    component={Link}
-                    onClick={() => sessionStorage.clear()}
-                    to='/signin'
+                    <Avatar sx={{ width: 50, height: 50 }} />
+                </IconButton>
+                <Menu
+                    anchorEl={anchorEl}
+                    id="account-menu"
+                    open={open}
+                    onClose={handleClose}
+                    onClick={handleClose}
+                    PaperProps={{
+                        elevation: 0,
+                        sx: {
+                            overflow: 'visible',
+                            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                            mt: 1.5,
+                            '& .MuiAvatar-root': {
+                                width: 32,
+                                height: 32,
+                                ml: -0.5,
+                                mr: 1,
+                            },
+                            '&:before': {
+                                content: '""',
+                                display: 'block',
+                                position: 'absolute',
+                                top: 0,
+                                right: 14,
+                                width: 10,
+                                height: 10,
+                                bgcolor: 'background.paper',
+                                transform: 'translateY(-50%) rotate(45deg)',
+                                zIndex: 0,
+                            },
+                        },
+                    }}
+                    transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                 >
-                    <ListItemIcon>
-                        <Logout fontSize="small" />
-                    </ListItemIcon>
-                    Logout
-                </MenuItem>
-            </Menu>
+            
+                    <MenuItem
+                        sx={{ fontFamily: 'Lato' }}
+                        component={Link}
+                        to='/profile'>
+                        <Avatar /> Profile
+                    </MenuItem>
+                    <MenuItem
+                        sx={{ fontFamily: 'Lato' }}
+                        component={Link}
+                        onClick={() => sessionStorage.clear()}
+                        to='/signin'
+                    >
+                        <ListItemIcon>
+                            <Logout fontSize="small" />
+                        </ListItemIcon>
+                        Logout
+                    </MenuItem>
+                </Menu>
 
-        </header>
+                        </header>
+            }
+        </>
     )
 }
