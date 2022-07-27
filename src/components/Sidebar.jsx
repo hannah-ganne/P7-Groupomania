@@ -1,3 +1,4 @@
+
 import logo from '../assets/icon-left-font-monochrome-black.svg'
 import Button from './Button'
 import '../utils/style/Sidebar.css'
@@ -5,13 +6,13 @@ import { Link } from 'react-router-dom'
 import { departments } from '../docs/list'
 import { useFetch } from '../utils/hooks/useFetch'
 import ForumIcon from '@mui/icons-material/Forum';
+import { useState } from 'react'
+import Drawer from '@mui/material/Drawer';
+import Box from '@mui/material/Box';
+const drawerWidth = 300;
 
-export default function Sidebar(props) {
-    let className
-    props.isSidebarShown ? 
-    className = `${props.className} show-sidebar`
-        : className = props.className
-    
+
+export default function Sidebar(props) {    
     const menuEl = departments.map(item => {
         return <Link key={item.id} className="filter-dept" onClick={() => props.handleFilter(item.label)} to='/'>
                     <div key={item.id} >
@@ -21,24 +22,112 @@ export default function Sidebar(props) {
                 </Link>
     })
 
+    const drawer = (
+        <>
+        <Link to="/">
+            <img className="logo" src={logo} alt="logo of groupomania" />
+        </Link>
+        <Link to="/write">
+            <Button className="sidebar--btn btn red" name="start posting" />
+        </Link>
+        <ul className="sidebar--menu">
+            <li>
+                <Link to="/">
+                    <ForumIcon />
+                    All posts
+                </Link>
+                {menuEl}
+            </li>
+        </ul>
+        <div className="copyright">© Groupomania All rights reserved.</div>   
+        </>
+    )
+
     return (
-        <nav className={className}>
-            <Link to="/">
-                <img className="logo" src={logo} alt="logo of groupomania" />
-            </Link>
-            <Link to="/write">
-                <Button className="sidebar--btn btn red" name="start posting" />
-            </Link>
-            <ul className="sidebar--menu">
-                <li>
-                    <Link to="/">
-                        <ForumIcon />
-                        All posts
-                    </Link>
-                    {menuEl}
-                </li>
-            </ul>
-            <div className="copyright">© Groupomania All rights reserved.</div>
-        </nav>
+    <>
+        <Box
+            component="nav"  
+            sx={{
+                width: { sm: drawerWidth },
+                flexShrink: { sm: 0 },
+                backgroundColor: '#FFD7D7',
+                boxShadow: 0,
+                borderRight: 0
+            }}
+            aria-label="mailbox folders"    
+        >
+            <Drawer
+                variant="temporary"
+                open={props.mobileOpen}
+                onClose={props.handleDrawerToggle}
+                ModalProps={{
+                    keepMounted: true, // Better open performance on mobile.
+                }}
+                sx={{
+                    display: { xs: 'block', sm: 'block', md: 'none' },
+                    boxShadow: 3,
+                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                }}
+            >
+                {drawer}
+            </Drawer>
+            <Drawer
+                variant="permanent"
+                sx={{
+                    display: { xs: 'none', sm: 'none', md: 'block'},
+                    boxShadow: 3,
+                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                }}
+                open
+            >
+                {drawer}
+            </Drawer>
+        </Box>
+    </>
     )
 }
+
+// import logo from '../assets/icon-left-font-monochrome-black.svg'
+// import Button from './Button'
+// import '../utils/style/Sidebar.css'
+// import { Link } from 'react-router-dom'
+// import { departments } from '../docs/list'
+// import { useFetch } from '../utils/hooks/useFetch'
+// import ForumIcon from '@mui/icons-material/Forum';
+
+// export default function Sidebar(props) {
+//     let className
+//     props.isSidebarShown ? 
+//     className = `${props.className} show-sidebar`
+//         : className = props.className
+    
+//     const menuEl = departments.map(item => {
+//         return <Link key={item.id} className="filter-dept" onClick={() => props.handleFilter(item.label)} to='/'>
+//                     <div key={item.id} >
+//                     {item.icon}
+//                     {item.label}
+//                     </div>
+//                 </Link>
+//     })
+
+//     return (
+//         <nav className={className}>
+//             <Link to="/">
+//                 <img className="logo" src={logo} alt="logo of groupomania" />
+//             </Link>
+//             <Link to="/write">
+//                 <Button className="sidebar--btn btn red" name="start posting" />
+//             </Link>
+//             <ul className="sidebar--menu">
+//                 <li>
+//                     <Link to="/">
+//                         <ForumIcon />
+//                         All posts
+//                     </Link>
+//                     {menuEl}
+//                 </li>
+//             </ul>
+//             <div className="copyright">© Groupomania All rights reserved.</div>
+//         </nav>
+//     )
+// }
