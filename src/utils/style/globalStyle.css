@@ -8,10 +8,14 @@
 
 html {
     box-sizing: border-box;
+    font-size: calc(12px + 0.390625vw);
 }
+
+
 
 *, *::before, *::after {
     box-sizing: inherit;
+    outline-color: var(--secondary-color)
 }
 
 body {
@@ -43,4 +47,5 @@ a {
 h1, h2, h3, p {
     margin: 0;
 }
+
 
