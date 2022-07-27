@@ -11,7 +11,7 @@ export default function Card({ id, title, firstName, department, imageUrl, creat
 
     return (
         <article>
-            <Avatar sx={{ width: 75, height: 75 }} src={imageUrl} />
+            <Avatar className="avatar" sx={{ width: 75, height: 75 }} src={imageUrl} />
             <div className="item--text">
                 <Link to={`/post/${id}`}>
                     <h3>{title}</h3>
@@ -24,7 +24,7 @@ export default function Card({ id, title, firstName, department, imageUrl, creat
                     <Tag name={department} />
                     <Tag name={topic} />
                 </div>
-            </div>
+            </div>    
             <div className="item--stats">
                 <p><span className="bold">{commentsCount}</span> {commentsCount <= 1 ? 'comment' : 'comments'}</p>
                 <p><span className="bold">{likesCount}</span> {likesCount <= 1 ? 'like' : 'likes'}</p>
