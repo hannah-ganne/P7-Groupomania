@@ -1,5 +1,5 @@
-import Avatar from '../components/Avatar'
-// import Avatar from '@mui/material/Avatar'
+// import Avatar from '../components/Avatar'
+import Avatar from '@mui/material/Avatar'
 import '../utils/style/profile.css'
 import Button from '../components/Button'
 import { useState, useEffect } from 'react'
@@ -51,8 +51,6 @@ export default function EditProfile() {
         setData(
             {...data, isUpFor: isUpForArray}
         )
-
-        console.log(data)
     }
 
     function deleteAccount() {
@@ -169,8 +167,14 @@ export default function EditProfile() {
             <form onSubmit={handleSubmit} >
                 <div className='profile-info'>
                     <div className='profile-avatar'>
-                        <Avatar />
-                        <label htmlFor='modify-profile' className='btn avatar-btn'>
+                        <Avatar
+                            sx={{
+                                width: 140,
+                                height: 140,
+                                mr: 5
+                                }}
+                            src={data.imageUrl}/>
+                        <label htmlFor='modify-profile' className='btn pink avatar-btn'>
                             Modify
                         </label>
                         <input type='file' id='modify-profile' accept='image/png, image/jpeg, image/gif' hidden/>   
@@ -178,15 +182,15 @@ export default function EditProfile() {
                     <div>
                         <p>
                             <span className='bold'>First Name: </span>
-                            <input type='text' placeholder={data.firstName} name='firstName' value={data.firstName} onChange={handleChange}></input>
+                            <input type='text' placeholder={data.firstName} name='firstName' value={data.firstName} onChange={handleChange} required></input>
                         </p>
                         <p>
                             <span className='bold'>Last Name: </span>
-                            <input type='text' placeholder={data.lastName} name='lastName' value={data.lastName} onChange={handleChange}></input>
+                            <input type='text' placeholder={data.lastName} name='lastName' value={data.lastName} onChange={handleChange} required></input>
                         </p>
                         <p>
                                 <span className='bold'>Department: </span>
-                                <select name='department' value={data.department} onChange={handleChange}>
+                                <select name='department' value={data.department} onChange={handleChange} required>
                                     <option value=''>Choose your department</option>
                                     {deptEl}
                                 </select>
@@ -200,7 +204,9 @@ export default function EditProfile() {
                             placeholder={data.expertIn}
                             name='expertIn'
                             value={data.expertIn}
-                            onChange={handleChange}>
+                            onChange={handleChange}
+                            required
+                        >
                         </input>
                         
                     <span className='bold uppercase'>Personally I'm interested in...</span>
@@ -209,7 +215,9 @@ export default function EditProfile() {
                             placeholder={data.interestedIn}
                             name='interestedIn'
                             value={data.interestedIn}
-                            onChange={handleChange}>
+                            onChange={handleChange}
+                            required
+                        >
                         </input>
 
                     <span className='bold uppercase'>Describe yourself in one word</span>
