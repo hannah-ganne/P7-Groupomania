@@ -45,6 +45,12 @@ export default function Signup() {
         .catch(err => console.log(err))
 }
 
+    function handleValidation() {
+        const nameRegex = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u
+        const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+
+    }
+    
     function handleSubmit(event) {
         event.preventDefault();
 
@@ -83,7 +89,7 @@ export default function Signup() {
                 <div className="signup-form-container">
                     <h2>Sign up</h2>
                     <form onSubmit={handleSubmit}>
-                        <input placeholder='First Name' name='firstName' value={signupData.firstName} onChange={handleChange}/>
+                        <input placeholder='First Name' name='firstName' value={signupData.firstName} onChange={handleChange} />
                         <input placeholder='Last Name' name='lastName' value={signupData.lastName} onChange={handleChange}/>
                         <input placeholder='Email Address' name='email' value={signupData.email} onChange={handleChange}/>
                         <input type="password" placeholder='Password' name='password' value={signupData.password} onChange={handleChange}/>

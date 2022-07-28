@@ -83,9 +83,6 @@ export default function Post() {
         .catch(err => console.log(err)); 
     }
 
-    console.log(data.post.user)
-
-
     return (
         <>
             {loading && <div>Loading...</div>}

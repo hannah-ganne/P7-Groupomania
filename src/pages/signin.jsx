@@ -39,7 +39,7 @@ export default function Signin() {
             .then(data => {
                 sessionStorage.setItem("token", JSON.stringify(data.token))
                 sessionStorage.setItem("isAdmin", JSON.stringify(data.isAdmin))
-                document.location.href = './';
+                document.location.href = '/';
             })
             .catch(err => console.log(err))
     }

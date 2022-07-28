@@ -10,8 +10,6 @@ import { useState } from 'react'
 import { isUpFor } from '../docs/list'
 
 export default function Profile() {
-    // const [myProfile, setMyProfile] = useState({})
-    // let result = useFetch("GET", "http://localhost:3000/api/auth/viewProfile", setMyProfile);
 
     const { data, loading, error } = useFetch('GET', 'http://localhost:3000/api/auth/viewProfile')
     
@@ -31,7 +29,7 @@ export default function Profile() {
     return (
         <>
             { loading && <div>loading...</div>}
-            { data &&  <section className="profile">
+            { data && <section className="profile">
             <h2 className="profile-title">Profile</h2>
             <div className="profile-info">
                 <div className="profile-avatar-readonly">
@@ -64,7 +62,7 @@ export default function Profile() {
                             if (index === data.isUpFor.length - 1) {
                                 return item.label
                             } else { return item.label + ', ' }
-                        })
+                            })
                         }
                     </p>    
             </div>
