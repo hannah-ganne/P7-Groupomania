@@ -19,6 +19,13 @@ export default function EditProfile() {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     
+    const [img, setImg] = useState();
+
+    function onImageChange(e) {
+        const [file] = e.target.files;
+        setImg(URL.createObjectURL(file));
+    }
+
     const deptEl = departments.map(dept => {
         return <option key={dept.id} value={dept.label}>{dept.label}</option>
     })
@@ -51,6 +58,8 @@ export default function EditProfile() {
         setData(
             {...data, isUpFor: isUpForArray}
         )
+        
+        console.log(data.isUpFor)
     }
 
     function deleteAccount() {
@@ -132,14 +141,25 @@ export default function EditProfile() {
     function handleSubmit(event) {
         event.preventDefault();
 
+        let input = document.getElementById('modify-profile')
+        let formData = new FormData();
+        formData.append("firstName", data.firstName);
+        formData.append("lastName", data.lastName);
+        formData.append("department", data.department);
+        formData.append("expertIn", data.expertIn);
+        formData.append("interestedIn", data.interestedIn);
+        formData.append("oneWord", data.oneWord);
+        formData.append("isUpFor", data.isUpFor)
+        formData.append("image", input.files[0]);
+
         const fetchOptions = {
             method: "PUT",
             headers: {
                 "Accept": "application/json",
-                "Content-Type": "application/json",
+                // "Content-Type": "application/json",
                 "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
             },
-            body: JSON.stringify(data)
+            body: formData
         }
 
         fetch ('http://localhost:3000/api/auth/setProfile', fetchOptions)
@@ -173,11 +193,11 @@ export default function EditProfile() {
                                 height: 140,
                                 mr: 5
                                 }}
-                            src={data.imageUrl}/>
+                            src={img ? img : data.imageUrl} />
                         <label htmlFor='modify-profile' className='btn pink avatar-btn'>
                             Modify
                         </label>
-                        <input type='file' id='modify-profile' accept='image/png, image/jpeg, image/gif' hidden/>   
+                        <input type='file' name='image' id='modify-profile' accept='image/png, image/jpeg, image/gif' onChange={onImageChange}/>   
                     </div>     
                     <div>
                         <p>
