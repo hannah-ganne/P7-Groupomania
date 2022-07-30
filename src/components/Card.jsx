@@ -4,7 +4,7 @@ import '../utils/style/Card.css'
 import { Link } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar'
 
-export default function Card({ id, title, firstName, department, imageUrl, createdAt, description, topic, likesCount, commentsCount }) {
+export default function Card({ id, title, firstName, department, imageUrl, createdAt, description, topic, likesCount, commentsCount, setDepartment, setTopic }) {
 
     const date = new Date(createdAt)
     const dateCreated = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear()
@@ -21,8 +21,8 @@ export default function Card({ id, title, firstName, department, imageUrl, creat
                     <p>{description}</p>
                 </Link>
                 <div className="tags">
-                    <Tag name={department} />
-                    <Tag name={topic} />
+                    <Tag tagType='department' name={department} setDepartment={setDepartment} />
+                    <Tag tagType='topic' name={topic} setTopic={setTopic} />
                 </div>
             </div>    
             <div className="item--stats">
