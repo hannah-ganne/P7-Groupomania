@@ -7,6 +7,7 @@ const drawerWidth = 300;
 
 export default function Home() {
     const [posts, setPosts] = useState([])
+
     useEffect(() => {
         const fetchOptions = {
             method: "GET",
@@ -21,86 +22,98 @@ export default function Home() {
             .then(res => res.json())
             .then(data => setPosts(data))
     }, [])
-
     const [mobileOpen, setMobileOpen] = useState(false);
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
 
-    function handleFilter(department) {
+    const [department, setDepartment] = useState('')
+    const [topic, setTopic] = useState('')
+    const [loadAll, setLoadAll] = useState(false)
 
+    useEffect(() => {
         const fetchOptions = {
+            method: "GET",
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`,
-            },
-            body: {"department" : department}
+                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
+            }
         }
 
-        fetch('http://localhost:3000/api/posts/filter/department', fetchOptions)
-            .then(res => res.json())
-            .then(data => setPosts(data))
-    }
+        if (department) {
+            fetch (`http://localhost:3000/api/posts/department/${department}`, fetchOptions)
+            .then (res =>  {
+                if(res.ok) {
+                    return res.json();
+                }
+                throw new Error("There's an error sending the data")
+            })
+            .then (data => {
+                setPosts(data)
+            })
+            .catch(err => console.log(err)); 
+        }
+    }, [department])
+
+    useEffect(() => {
+        const fetchOptions = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
+            }
+        }
+
+        if (topic) {
+            fetch (`http://localhost:3000/api/posts/topic/${topic}`, fetchOptions)
+            .then (res =>  {
+                if(res.ok) {
+                    return res.json();
+                }
+                throw new Error("There's an error sending the data")
+            })
+            .then (data => {
+                setPosts(data)
+            })
+            .catch(err => console.log(err)); 
+        }
+    }, [topic])
+
+    useEffect(() => {
+        const fetchOptions = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
+            }
+        }
+
+        fetch ('http://localhost:3000/api/posts', fetchOptions)
+        .then (res =>  {
+            if(res.ok) {
+                return res.json();
+            }
+            throw new Error("There's an error sending the data")
+        })
+        .then (data => {
+            setPosts(data)
+        })
+        .catch(err => console.log(err)); 
+    }, [loadAll])
     
     return (
         <>
             <Header handleDrawerToggle={handleDrawerToggle} />
-            <Sidebar mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} />
-            <Outlet context={[posts, setPosts]}/>
+            <Sidebar
+                mobileOpen={mobileOpen}
+                handleDrawerToggle={handleDrawerToggle}
+                setDepartment={setDepartment}
+                setLoadAll={setLoadAll} 
+            />
+            <Outlet context={[posts, setPosts, department, setDepartment, topic, setTopic, loadAll]}/>
         </>
     )
 }
-// import { useEffect, useState } from 'react'
-// import Sidebar from '../components/Sidebar'
-// import Header from '../components/Header'
-// import { Outlet } from 'react-router-dom'
-// import useFetch from '../utils/hooks/useFetch'
-
-// export default function Home() {
-//     const [isSidebarShown, setIsSidebarShown] = useState(false)
-//     const [posts, setPosts] = useState([])
-
-//     function toggleSidebar() {
-//         setIsSidebarShown(prevState => !prevState)
-//     }
-
-//     useEffect(() => {
-//         const fetchOptions = {
-//             method: "GET",
-//             headers: {
-//                 "Accept": "application/json",
-//                 "Content-Type": "application/json",
-//                 "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`,
-//             }
-//         }
-
-//         fetch('http://localhost:3000/api/posts', fetchOptions)
-//             .then(res => res.json())
-//             .then(data => setPosts(data))
-//     }, [])
-
-//     function handleFilter(department) {
-
-//         const fetchOptions = {
-//             headers: {
-//                 "Accept": "application/json",
-//                 "Content-Type": "application/json",
-//                 "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`,
-//             },
-//             body: {"department" : department}
-//         }
-
-//         fetch('http://localhost:3000/api/posts/filter/department', fetchOptions)
-//             .then(res => res.json())
-//             .then(data => setPosts(data))
-//     }
-    
-//     return (
-//         <>
-//             <Sidebar className="sidebar" isSidebarShown={isSidebarShown} handleFilter={handleFilter} />
-//             <Header toggleSidebar={toggleSidebar} />
-//             <Outlet context={[posts, setPosts]}/>
-//         </>
-//     )
-// }
