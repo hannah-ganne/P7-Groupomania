@@ -15,23 +15,72 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import EmailIcon from '@mui/icons-material/Email';
 import CustomModal from '../components/CustomModal'
-// import Modal from '@mui/material/Modal';
-// import Box from '@mui/material/Box';
-// import Typography from '@mui/material/Typography';
+import { useOutletContext } from 'react-router-dom'
 
 export default function Post() {
     const [modalOpen, setModalOpen] = useState(false);
     const handleOpen = () => setModalOpen(true);
 
+    const [snackOpen, setSnackOpen] = useState(false);
+
     const [comment, setComment] = useState('')
+    const [posts, setPosts, department, setDepartment, topic, setTopic] = useOutletContext();
 
     let { id } = useParams();
 
-    const { data, error, loading } = useFetch('GET',`http://localhost:3000/api/posts/${id}`)
+    const { data, error, loading } = useFetch('GET', `http://localhost:3000/api/posts/${id}`)
 
     if (error) {
         console.log(error)
     } 
+
+    useEffect(() => {
+        const fetchOptions = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
+            }
+        }
+        if (department) {
+            fetch (`http://localhost:3000/api/posts/department/${department}`, fetchOptions)
+            .then (res =>  {
+                if(res.ok) {
+                    return res.json();
+                }
+                throw new Error("There's an error sending the data")
+            })
+            .then (data => {
+                setPosts(data)
+            })
+            .catch(err => console.log(err)); 
+        }
+    }, [department])
+
+    useEffect(() => {
+        const fetchOptions = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
+            }
+        }
+        if (department) {
+            fetch (`http://localhost:3000/api/posts/topic/${topic}`, fetchOptions)
+            .then (res =>  {
+                if(res.ok) {
+                    return res.json();
+                }
+                throw new Error("There's an error sending the data")
+            })
+            .then (data => {
+                setPosts(data)
+            })
+            .catch(err => console.log(err)); 
+        }
+    }, [department])
 
     function deletePost() {
 
@@ -51,8 +100,31 @@ export default function Post() {
             }
             throw new Error("There's an error sending the data")
         })
-        .then (data => {
+        .then(data => {
             document.location.href = './';
+        })
+        .catch(err => console.log(err)); 
+    }
+
+    function deleteComment(commentId) {
+        const fetchOptions = {
+            method: "DELETE",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
+            }
+        }
+
+        fetch (`http://localhost:3000/api/posts/${id}/comment/${commentId}`, fetchOptions)
+        .then (res =>  {
+            if(res.ok) {
+                return res.json();
+            }
+            throw new Error("There's an error sending the data")
+        })
+        .then(data => {
+            document.location.href = `/post/${id}`;
         })
         .catch(err => console.log(err)); 
     }
@@ -67,7 +139,7 @@ export default function Post() {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
             },
-            body: JSON.stringify(comment)
+            body: JSON.stringify({"comment": comment})
         }
 
         fetch (`http://localhost:3000/api/posts/${id}/comment`, fetchOptions)
@@ -77,7 +149,7 @@ export default function Post() {
             }
             throw new Error("There's an error sending the data")
         })
-        .then (data => {
+            .then(data => {
             document.location.href = `/post/${id}`;
         })
         .catch(err => console.log(err)); 
@@ -87,11 +159,11 @@ export default function Post() {
         <>
             {loading && <div>Loading...</div>}
             {data && <section className='post'>
-            <Link to='#'>
+            <Link onClick={() => setDepartment(data.post.user.department)} to='/'>
                 <small className='bold'>{data.post.user.department.toUpperCase()}</small>
             </Link>
             <span> | </span>    
-            <Link to='#'>
+            <Link onClick={() => setTopic(data.post.topic)} to='/'>
                 <small className='bold'>{data.post.topic.toUpperCase()}</small> 
             </Link>
             <h1>{data.post.title}</h1>
@@ -134,11 +206,11 @@ export default function Post() {
                 />       
             </div>
             <div className='post-contents'>
-                <img src={data.post.imageUrl} alt='main image of the post' />
+                {data.post.imageUrl && <img src={data.post.imageUrl} alt='main image of the post' />}
                 <p>{data.post.description}</p>
             </div>
             <div className='like'>
-                <div>    
+                <div>
                     <ThumbUpIcon fontSize='small'/>
                     <span className='bold'>{data.likesCount}</span>
                 </div>    
@@ -159,7 +231,14 @@ export default function Post() {
                     <Button className='btn red' name='send' type='submit'/>
                 </form>
                     {data.post.comments.map(comment => {
-                    return <Comment key={comment.id} userName={comment.user.firstName} comment={comment.comment} imageUrl={comment.user.imageUrl} />
+                    return <Comment
+                        key={comment.id}
+                        id={comment.id}
+                        userName={comment.user.firstName}
+                        comment={comment.comment}
+                        imageUrl={comment.user.imageUrl} 
+                        deleteComment={deleteComment}
+                        />
                 })}
             </div>
         </section>}
