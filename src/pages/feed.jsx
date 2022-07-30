@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 
 export default function Feed() {
 
-    const [posts, setPosts] = useOutletContext();
+    const [posts, setPosts, department, setDepartment, topic, setTopic] = useOutletContext();
     const [sortType, setSortType] = useState(0);
 
     useEffect(() => {
@@ -29,7 +29,57 @@ export default function Feed() {
             setPosts(data)
         })
         .catch(err => console.log(err)); 
-    })
+    }, [sortType])
+
+    useEffect(() => {
+        const fetchOptions = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
+            }
+        }
+
+        if (department) {
+            fetch (`http://localhost:3000/api/posts/department/${department}`, fetchOptions)
+            .then (res =>  {
+                if(res.ok) {
+                    return res.json();
+                }
+                throw new Error("There's an error sending the data")
+            })
+            .then (data => {
+                setPosts(data)
+            })
+            .catch(err => console.log(err)); 
+        }
+    }, [department])
+
+    useEffect(() => {
+        const fetchOptions = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
+            }
+        }
+
+        if (topic) {
+            fetch (`http://localhost:3000/api/posts/topic/${topic}`, fetchOptions)
+            .then (res =>  {
+                if(res.ok) {
+                    return res.json();
+                }
+                throw new Error("There's an error sending the data")
+            })
+            .then (data => {
+                setPosts(data)
+            })
+            .catch(err => console.log(err)); 
+        }
+    }, [topic])
 
     const cardEl = posts.map(post => {
         return <Card
@@ -44,6 +94,8 @@ export default function Feed() {
             topic={post.topic}
             likesCount={post.likesCount}
             commentsCount={post.commentsCount}
+            setDepartment={setDepartment}
+            setTopic={setTopic}
             />
     })
 
