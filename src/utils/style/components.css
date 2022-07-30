@@ -84,7 +84,6 @@
 .comment {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     margin-top: 1em;
 }
 
@@ -99,7 +98,8 @@
 
 .comment > div {
     display: flex;
-    align-items: center
+    align-items: center;
+    margin-right: 1em;
 }
 
 .comment div span {
@@ -109,7 +109,6 @@
 
 .delete-icon {
     visibility: hidden;
-    width: 22px;
     cursor: pointer;
 }
 

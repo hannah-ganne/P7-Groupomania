@@ -30,18 +30,6 @@ export default function EditProfile() {
         return <option key={dept.id} value={dept.label}>{dept.label}</option>
     })
 
-    // const isUpForEl = isUpForArray.map((item, index) => {
-    //     console.log(data)
-
-    //     return <Checkbox
-    //         key={item.label}
-    //         isChecked={item.checked}
-    //         checkHandler={() => handleCheckbox(index)}
-    //         label={item.label}
-    //         index={index}
-    //     />
-    // })
-
     function handleChange(event) {
         const { name, value } = event.target
 
@@ -149,7 +137,7 @@ export default function EditProfile() {
         formData.append("expertIn", data.expertIn);
         formData.append("interestedIn", data.interestedIn);
         formData.append("oneWord", data.oneWord);
-        formData.append("isUpFor", data.isUpFor)
+        formData.append("isUpFor", JSON.stringify(data.isUpFor))
         formData.append("image", input.files[0]);
 
         const fetchOptions = {
@@ -160,6 +148,7 @@ export default function EditProfile() {
                 "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
             },
             body: formData
+            // body: JSON.stringify(data)
         }
 
         fetch ('http://localhost:3000/api/auth/setProfile', fetchOptions)
