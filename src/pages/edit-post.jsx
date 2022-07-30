@@ -14,7 +14,14 @@ export default function EditPost() {
     function handleChange(event) {
         const { name, value } = event.target
 
-        setData({ ...data, [name]: value })
+        setData(prev => ({
+            ...prev,
+            post: {
+                ...prev.post,
+                [name]: value
+            }
+        }))
+        console.log(data.post)
     }
 
     function handleSubmit(event) {
@@ -22,16 +29,15 @@ export default function EditPost() {
 
         let input = document.getElementById('image-upload')
         let formData = new FormData();
-        formData.append("title", data.title);
-        formData.append("topic", data.topic);
-        formData.append("description", data.description);
+        formData.append("title", data.post.title);
+        formData.append("topic", data.post.topic);
+        formData.append("description", data.post.description);
         formData.append("image", input.files[0]);
 
         const fetchOptions = {
             method: "PUT",
             headers: {
                 "Accept": "application/json",
-                // "Content-Type": "application/json",
                 "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
             },
             body: formData
