@@ -8,6 +8,9 @@ import { Link } from 'react-router-dom'
 import useFetch from '../utils/hooks/useFetch'
 import { useState } from 'react'
 import { isUpFor } from '../docs/list'
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
+
 
 export default function Profile() {
 
@@ -56,14 +59,14 @@ export default function Profile() {
                     {!data.oneWord ? suggestion : <p>I am {(checkVowel())} <span className='bold uppercase'>{data.oneWord}</span> person</p>}
                 <span className="bold uppercase">I am up for...</span>
                     <p>
-                        {data.isUpFor
-                            .filter(item => item.checked)
-                            .map((item, index) => {
-                            if (index === data.isUpFor.length - 1) {
-                                return item.label
-                            } else { return item.label + ', ' }
-                            })
-                        }
+                        <Stack direction="row" spacing={1}>
+                            {data.isUpFor
+                                .filter(item => item.checked)
+                                .map(item => {
+                                    return <Chip label={item.label} variant="outlined" sx={{fontFamily: 'Montserrat'}}/>
+                                })
+                            }
+                        </Stack>
                     </p>    
             </div>
             <Link to="/profile/edit">
