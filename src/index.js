@@ -12,6 +12,7 @@ import EditProfile from './pages/edit-profile'
 import Write from './pages/write'
 import Post from './pages/post'
 import EditPost from './pages/edit-post'
+import Admin from './pages/admin'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -27,6 +28,7 @@ root.render(
           <Route path="write" element={<Write />} />
           <Route path="post/:id" element={<Post />} />
           <Route path="post/:id/edit" element={<EditPost />} />
+          <Route path="admin" element={<Admin />} />
           <Route path="*" element={<Error />} />
         </Route>
       </Routes>
