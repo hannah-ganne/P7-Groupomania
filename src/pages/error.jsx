@@ -1,16 +1,9 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Button from '../components/Button'
 import '../utils/style/error.css'
 
 
 export default function Error() {
-    const [isSidebarShown, setIsSidebarShown] = useState(false)
-    const [isSignedIn, setIsSignedIn] = useState(true)
-
-    function toggleSidebar() {
-        setIsSidebarShown(prevState => !prevState)
-    }
 
     return (
         <section className="error-section">
