@@ -21,10 +21,8 @@ export default function Post() {
     const [modalOpen, setModalOpen] = useState(false);
     const handleOpen = () => setModalOpen(true);
 
-    const [snackOpen, setSnackOpen] = useState(false);
-
     const [comment, setComment] = useState('')
-    const [posts, setPosts, department, setDepartment, topic, setTopic] = useOutletContext();
+    const [setPosts, department, setDepartment, topic, setTopic] = useOutletContext();
 
     let { id } = useParams();
 
@@ -194,19 +192,24 @@ export default function Post() {
                 />
                 <p>by <span className='bold'>{data.post.user.firstName}</span> from <span className='bold'>{data.post.user.department}</span> on {new Date(data.post.createdAt).getDate() + '/' + new Date(data.post.createdAt).getMonth() + '/' + new Date(data.post.createdAt).getFullYear()}</p>
                 </div>
-                <DropdownMenu
-                    button={(<MoreVertIcon />)}
-                    menuIcon1={(<EditIcon />)} 
-                    menuName1='Edit post'
-                    menuLink1='./edit'
-                    menuIcon2={(<DeleteIcon />)}
-                    menuName2='Delete post'
-                    menuOnClick2={deletePost}
-                    menuLink2='/'
-                />       
+                    {
+                        (data.post.userId === JSON.parse(sessionStorage.getItem("userId")) || JSON.parse(sessionStorage.getItem("isAdmin")))
+                        && (
+                        <DropdownMenu
+                        button={(<MoreVertIcon />)}
+                        menuIcon1={(<EditIcon />)} 
+                        menuName1='Edit post'
+                        menuLink1='./edit'
+                        menuIcon2={(<DeleteIcon />)}
+                        menuName2='Delete post'
+                        menuOnClick2={deletePost}
+                        menuLink2='/'
+                        />)
+                    }                    
+
             </div>
             <div className='post-contents'>
-                {data.post.imageUrl && <img src={data.post.imageUrl} alt='main image of the post' />}
+                {data.post.imageUrl && <img src={data.post.imageUrl} alt="user selected file" />}
                 <p>{data.post.description}</p>
             </div>
             <div className='like'>
@@ -238,6 +241,7 @@ export default function Post() {
                         comment={comment.comment}
                         imageUrl={comment.user.imageUrl} 
                         deleteComment={deleteComment}
+                        userId={comment.userId}
                         />
                 })}
             </div>

@@ -1,6 +1,5 @@
 // import Avatar from './Avatar'
 import Avatar from '@mui/material/Avatar'
-import deleteIcon from '../assets/delete.png'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton } from '@mui/material';
 
@@ -12,9 +11,13 @@ export default function Comment(props) {
             <span className='bold'>{props.userName}</span>
             <p>{props.comment}</p>
             </div>
+            {
+            (props.userId === JSON.parse(sessionStorage.getItem("userId")) || JSON.parse(sessionStorage.getItem("isAdmin")))
+            && (
             <IconButton className='delete-icon' onClick={(e) => props.deleteComment(e.target.closest('div').id)}>
                 <DeleteIcon fontSize='medium' />
             </IconButton>
+            )}
         </div>
     )
 }

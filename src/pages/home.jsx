@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react'
 import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
 import { Outlet } from 'react-router-dom'
-import useFetch from '../utils/hooks/useFetch'
-const drawerWidth = 300;
 
 export default function Home() {
     const [posts, setPosts] = useState([])
+
+    const [keyword, setKeyword] = useState('')
+
 
     useEffect(() => {
         const fetchOptions = {
@@ -22,6 +23,7 @@ export default function Home() {
             .then(res => res.json())
             .then(data => setPosts(data))
     }, [])
+
     const [mobileOpen, setMobileOpen] = useState(false);
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -30,6 +32,7 @@ export default function Home() {
     const [department, setDepartment] = useState('')
     const [topic, setTopic] = useState('')
     const [loadAll, setLoadAll] = useState(false)
+    const [userId, setUserId] = useState()
 
     useEffect(() => {
         const fetchOptions = {
@@ -81,6 +84,32 @@ export default function Home() {
         }
     }, [topic])
 
+
+    useEffect(() => {
+        const fetchOptions = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
+            }
+        }
+
+        if (userId) {
+            fetch (`http://localhost:3000/api/posts/user/${userId}`, fetchOptions)
+            .then (res =>  {
+                if(res.ok) {
+                    return res.json();
+                }
+                throw new Error("There's an error sending the data")
+            })
+            .then (data => {
+                setPosts(data)
+            })
+            .catch(err => console.log(err)); 
+        }
+    }, [userId])
+
     useEffect(() => {
         const fetchOptions = {
             method: "GET",
@@ -106,14 +135,14 @@ export default function Home() {
     
     return (
         <>
-            <Header handleDrawerToggle={handleDrawerToggle} />
+            <Header handleDrawerToggle={handleDrawerToggle} context={[keyword, setKeyword]} />
             <Sidebar
                 mobileOpen={mobileOpen}
                 handleDrawerToggle={handleDrawerToggle}
                 setDepartment={setDepartment}
                 setLoadAll={setLoadAll} 
             />
-            <Outlet context={[posts, setPosts, department, setDepartment, topic, setTopic, loadAll]}/>
+            <Outlet context={[posts, setPosts, department, setDepartment, topic, setTopic, loadAll, userId, setUserId]}/>
         </>
     )
 }

@@ -2,7 +2,6 @@ import Button from '../components/Button'
 import '../utils/style/write.css'
 import { topics } from '../docs/list'
 import { useState } from 'react'
-import axios from 'axios'
 
 export default function Write() {
     const [myPost, setMyPost] = useState({
@@ -10,7 +9,6 @@ export default function Write() {
         topic: "",
         description: ""
     })
-    const [selectedFile, setSelectedFile] = useState("");
 
     const topicEl = topics.map(topic => {
         return <option key={topic.id} value={topic.label}>{topic.label}</option>

@@ -1,4 +1,3 @@
-import user from '../assets/user.png'
 import '../utils/style/profile.css'
 import Button from '../components/Button'
 import Avatar from '@mui/material/Avatar'
@@ -6,8 +5,6 @@ import Avatar from '@mui/material/Avatar'
 
 import { Link } from 'react-router-dom'
 import useFetch from '../utils/hooks/useFetch'
-import { useState } from 'react'
-import { isUpFor } from '../docs/list'
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 
@@ -58,16 +55,16 @@ export default function Profile() {
                 <span className="bold uppercase">Describe yourself in one word</span>
                     {!data.oneWord ? suggestion : <p>I am {(checkVowel())} <span className='bold uppercase'>{data.oneWord}</span> person</p>}
                 <span className="bold uppercase">I am up for...</span>
-                    <p>
+                    <div>
                         <Stack direction="row" spacing={1}>
                             {data.isUpFor
                                 .filter(item => item.checked)
                                 .map(item => {
-                                    return <Chip label={item.label} variant="outlined" sx={{fontFamily: 'Montserrat'}}/>
+                                    return <Chip key={item.label} label={item.label} variant="outlined" sx={{fontFamily: 'Montserrat'}}/>
                                 })
                             }
                         </Stack>
-                    </p>    
+                    </div>    
             </div>
             <Link to="/profile/edit">
                 <Button className="btn red" name="Modify profile" />

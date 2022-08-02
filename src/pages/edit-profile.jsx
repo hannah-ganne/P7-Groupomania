@@ -2,9 +2,9 @@
 import Avatar from '@mui/material/Avatar'
 import '../utils/style/profile.css'
 import Button from '../components/Button'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import useFetch from '../utils/hooks/useFetch'
-import { departments, oneWord, isUpFor } from '../docs/list'
+import { departments, oneWord } from '../docs/list'
 import Checkbox from '../components/Checkbox'
 import { Link } from 'react-router-dom'
 import Box from '@mui/material/Box';

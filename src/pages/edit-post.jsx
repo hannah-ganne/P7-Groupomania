@@ -2,7 +2,6 @@ import Button from '../components/Button'
 import '../utils/style/write.css'
 import { topics } from '../docs/list'
 import { useParams } from 'react-router-dom'
-import { useState } from 'react'
 import useFetch from '../utils/hooks/useFetch'
 
 

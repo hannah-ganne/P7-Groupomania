@@ -1,7 +1,7 @@
 import logo from '../assets/icon-left-font-monochrome-black.svg'
 import Button from '../components/Button'
 import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import '../utils/style/signup.css'
 
 export default function Signup() {
@@ -40,6 +40,8 @@ export default function Signup() {
         })
             .then(data => {
             sessionStorage.setItem("token", JSON.stringify(data.token))
+            sessionStorage.setItem("userId", JSON.stringify(data.userId))
+            sessionStorage.setItem("isAdmin", JSON.stringify(data.isAdmin))
             document.location.href = './profile/edit';
         })
         .catch(err => console.log(err))
