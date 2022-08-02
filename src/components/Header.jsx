@@ -13,11 +13,13 @@ import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import { Link } from 'react-router-dom'
 import useFetch from '../utils/hooks/useFetch'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export default function Header(props) {
 
     const { data, loading, error } = useFetch('GET', 'http://localhost:3000/api/auth/viewProfile')
 
+    // const [keyword, setKeyword] = useOutletContext()
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -26,6 +28,7 @@ export default function Header(props) {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
 
     if (error) {
         console.log(error)
@@ -45,6 +48,7 @@ export default function Header(props) {
             >
             <MenuIcon className="sidebar-toggle" />
             </IconButton> 
+                <form className="search-bar" >   
                 <Input
                     startAdornment={
                         <InputAdornment position="start">
@@ -55,7 +59,11 @@ export default function Header(props) {
                     sx={{
                         fontFamily: 'Lato',
                     }}
+                    // value={keyword}
+                    // onChange={(e) => setKeyword(e.target.value)}
+                    fullWidth
                 />
+                </form>         
                 <IconButton
                     onClick={handleClick}
                     size="small"
@@ -64,7 +72,7 @@ export default function Header(props) {
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
                 >
-                    <Avatar sx={{ width: 50, height: 50 }} />
+                    <Avatar sx={{ width: 50, height: 50 }} src={data.imageUrl} />
                 </IconButton>
                 <Menu
                     anchorEl={anchorEl}
@@ -101,12 +109,26 @@ export default function Header(props) {
                     transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                 >
-            
+
+                    {JSON.parse(sessionStorage.getItem("isAdmin")) && (
+                        <MenuItem
+                            sx={{ fontFamily: 'Lato' }}
+                            component={Link}
+                            to='/admin'>
+                        <ListItemIcon>
+                            <AccountCircleIcon fontSize="small"/>     
+                        </ListItemIcon>
+                        Admin
+                        </MenuItem> 
+                    )}
                     <MenuItem
                         sx={{ fontFamily: 'Lato' }}
                         component={Link}
                         to='/profile'>
-                        <Avatar /> Profile
+                    <ListItemIcon>
+                        <AccountCircleIcon fontSize="small"/>     
+                    </ListItemIcon>    
+                    Profile
                     </MenuItem>
                     <MenuItem
                         sx={{ fontFamily: 'Lato' }}
