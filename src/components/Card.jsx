@@ -16,7 +16,7 @@ export default function Card({ id, title, firstName, department, imageUrl, creat
                 <Link to={`/post/${id}`}>
                     <h3>{title}</h3>
                     <p className="item--text--data">
-                        <span className="bold">{firstName}</span> from <span className="bold">{department}</span> started on {dateCreated}
+                        <span className="bold">{firstName}</span> from <span className="bold">{department}</span> posted on {dateCreated}
                     </p>
                     <p>{description}</p>
                 </Link>
