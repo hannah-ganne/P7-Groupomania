@@ -81,13 +81,13 @@
     text-transform: uppercase;
 }
 
-.comment {
+.comment, .user-info {
     display: flex;
     align-items: center;
     margin-top: 1em;
 }
 
-.comment:hover .delete-icon {
+.comment:hover .delete-icon, .user-info:hover .delete-icon {
     visibility: visible;
 }
 
@@ -102,9 +102,14 @@
     margin-right: 1em;
 }
 
-.comment div span {
+.comment div span, .user-info p {
     margin-left: 1em;
     margin-right: 1em;
+}
+
+.user-info p span {
+    margin-left: 0.3em;
+    margin-right: 0.5em;
 }
 
 .delete-icon {
