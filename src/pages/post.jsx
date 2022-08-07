@@ -22,7 +22,7 @@ export default function Post() {
     const handleOpen = () => setModalOpen(true);
 
     const [comment, setComment] = useState('')
-    const [setPosts, department, setDepartment, topic, setTopic] = useOutletContext();
+    const [posts, setPosts, department, setDepartment, topic, setTopic] = useOutletContext();
 
     let { id } = useParams();
 
@@ -190,7 +190,7 @@ export default function Post() {
                     isUpFor={data.post.user.isUpFor
                             .filter(item => item.checked)}
                 />
-                <p>by <span className='bold'>{data.post.user.firstName}</span> from <span className='bold'>{data.post.user.department}</span> on {new Date(data.post.createdAt).getDate() + '/' + new Date(data.post.createdAt).getMonth() + '/' + new Date(data.post.createdAt).getFullYear()}</p>
+                <p>by <span className='bold'>{data.post.user.firstName}</span> from <span className='bold'>{data.post.user.department}</span> on {new Date(data.post.createdAt).getDate() + '/' + (new Date(data.post.createdAt).getMonth() + 1) + '/' + new Date(data.post.createdAt).getFullYear()}</p>
                 </div>
                     {
                         (data.post.userId === JSON.parse(sessionStorage.getItem("userId")) || JSON.parse(sessionStorage.getItem("isAdmin")))
