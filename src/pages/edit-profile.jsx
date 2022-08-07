@@ -144,11 +144,9 @@ export default function EditProfile() {
             method: "PUT",
             headers: {
                 "Accept": "application/json",
-                // "Content-Type": "application/json",
                 "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
             },
             body: formData
-            // body: JSON.stringify(data)
         }
 
         fetch ('http://localhost:3000/api/auth/setProfile', fetchOptions)
