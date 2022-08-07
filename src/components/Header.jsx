@@ -1,6 +1,5 @@
 import '../utils/style/Header.css'
 import { useState } from 'react'
-// import Avatar from './Avatar'
 import Avatar from '@mui/material/Avatar'
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
@@ -18,17 +17,22 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 export default function Header(props) {
 
     const { data, loading, error } = useFetch('GET', 'http://localhost:3000/api/auth/viewProfile')
+    const [inputValue, setInputValue] = useState('')
 
-    // const [keyword, setKeyword] = useOutletContext()
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
-    const handleClick = (event) => {
+    function handleClick(event) {
         setAnchorEl(event.currentTarget);
     };
-    const handleClose = () => {
+    function handleClose() {
         setAnchorEl(null);
     };
 
+    function handleKeyPress(event) {
+        if (event.charCode === 13) {
+            props.setKeyword(inputValue)
+        }
+    }
 
     if (error) {
         console.log(error)
@@ -47,23 +51,26 @@ export default function Header(props) {
             sx={{ mr: 2, display: { md: 'none' } }}
             >
             <MenuIcon className="sidebar-toggle" />
-            </IconButton> 
-                <form className="search-bar" >   
+            </IconButton>
+                    
+            <div className="search-bar">   
                 <Input
                     startAdornment={
                         <InputAdornment position="start">
-                            <SearchIcon />
+                            <SearchIcon />                                                
                         </InputAdornment>
                     }
                     placeholder='Search forum...'
                     sx={{
                         fontFamily: 'Lato',
                     }}
-                    // value={keyword}
-                    // onChange={(e) => setKeyword(e.target.value)}
                     fullWidth
+                    value={inputValue}
+                            onChange={event => setInputValue(event.target.value)}
+                            onKeyPress={handleKeyPress}
                 />
-                </form>         
+            </div>
+                    
                 <IconButton
                     onClick={handleClick}
                     size="small"
