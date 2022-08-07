@@ -80,8 +80,6 @@ export default function Write() {
                         id="image-upload"
                         name="image"
                         accept="image/png, image/jpeg, image/gif"
-                        // value=""
-                        // onChange={(e) => setSelectedFile(e.target.files[0])}
                     />
                     <Button className="btn red" name="Post" type="submit" />
                 </div>
