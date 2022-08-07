@@ -7,7 +7,7 @@ import Avatar from '@mui/material/Avatar'
 export default function Card({ id, title, firstName, department, imageUrl, createdAt, description, topic, likesCount, commentsCount, setDepartment, setTopic }) {
 
     const date = new Date(createdAt)
-    const dateCreated = date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear()
+    const dateCreated = date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getFullYear()
 
     return (
         <article>
