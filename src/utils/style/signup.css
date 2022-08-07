@@ -30,7 +30,7 @@
     flex-direction: column;
     max-width: 50vw;
     min-width: 420px;
-    max-height: 580px;
+    /* max-height: 580px; */
     height: fit-content;
     z-index: 10;
     border-radius: 30px;
@@ -59,12 +59,21 @@
     font-size: 18px;
     line-height: 24px;
     color: #4E5166;
-    padding: 10px 20px;
-    margin-bottom: 0.8em;
+    padding: 10px 20px;   
+    margin-bottom: 0.5em; 
 }
 
-.signup-form-container form input:last-of-type {
-    margin-bottom: 30px;
+.signup-form-container form small {
+    margin-bottom: 0.8em;
+    color: var(--primary-color);
+    font-size: 0.8em;
+    align-self: flex-start;
+    margin-left: 1.5em;
+}
+
+.signup-form-container form small::before {
+    display: inline;
+    content: "⚠ ";
 }
 
 .signup-form-container form input:focus {
@@ -73,6 +82,10 @@
 
 .signup-form-container form > p {
     margin-top: 20px;
+}
+
+.signup-form-container form button {
+    margin-top: 1em;
 }
 
 @media screen and (max-width: 768px) {
