@@ -16,6 +16,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import EmailIcon from '@mui/icons-material/Email';
 import CustomModal from '../components/CustomModal'
 import { useOutletContext } from 'react-router-dom'
+import IconButton from '@mui/material/IconButton';
 
 export default function Post() {
     const [modalOpen, setModalOpen] = useState(false);
@@ -26,7 +27,42 @@ export default function Post() {
 
     let { id } = useParams();
 
-    const { data, error, loading } = useFetch('GET', `http://localhost:3000/api/posts/${id}`)
+    const { data, setData, error, loading } = useFetch('GET', `http://localhost:3000/api/posts/${id}`)
+    const { data: profile } = useFetch('GET', 'http://localhost:3000/api/auth/viewProfile')
+
+    const [like, setLike] = useState(null)
+
+    function handleLike(event) {
+
+        const {id: buttonId} = event.currentTarget
+        
+        if (like === '0' || like === null) {
+            setLike(buttonId)
+        } else if (buttonId === like) {
+            setLike('0')
+        }
+    }
+
+    // useEffect(() => {
+    //     const fetchOptions = {
+    //         method: "POST",
+    //         headers: {
+    //             "Accept": "application/json",
+    //             "Content-Type": "application/json",
+    //             "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`,
+    //         },
+    //         body: JSON.stringify({ "like": parseInt(like) })
+    //     }
+
+    //     fetch(`http://localhost:3000/api/posts/${id}/like`, fetchOptions)
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             console.log(data.message)
+    //         })
+    //         .catch(err => {
+    //             console.log(err);
+    //         })
+    // }, [like])
 
     if (error) {
         console.log(error)
@@ -157,6 +193,7 @@ export default function Post() {
         <>
             {loading && <div>Loading...</div>}
             {data && <section className='post'>
+                {console.log(like)}
             <Link onClick={() => setDepartment(data.post.user.department)} to='/'>
                 <small className='bold'>{data.post.user.department.toUpperCase()}</small>
             </Link>
@@ -214,17 +251,21 @@ export default function Post() {
             </div>
             <div className='like'>
                 <div>
-                    <ThumbUpIcon fontSize='small'/>
+                    <IconButton id='1' onClick={handleLike} >
+                        <ThumbUpIcon fontSize='small' />    
+                    </IconButton>
                     <span className='bold'>{data.likesCount}</span>
                 </div>    
                 <div>
-                    <ThumbDownIcon fontSize='small'/>
+                    <IconButton id='-1' onClick={handleLike} >
+                        <ThumbDownIcon fontSize='small' />
+                    </IconButton>        
                     <span className='bold'>{data.dislikesCount}</span>
                 </div>    
             </div>
             <div className='comments'>
                 <form className='comment-input' onSubmit={handleSubmit}>
-                    <Avatar />
+                    <Avatar src={profile.imageUrl} />
                     <input
                         type='text'
                         placeholder='Leave a comment'
@@ -242,8 +283,8 @@ export default function Post() {
                         imageUrl={comment.user.imageUrl} 
                         deleteComment={deleteComment}
                         userId={comment.userId}
-                        />
-                })}
+                    />    
+                    })}
             </div>
         </section>}
         </>
