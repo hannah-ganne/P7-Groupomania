@@ -27,7 +27,7 @@ export default function Post() {
     }
 
     const [comment, setComment] = useState('')
-    const [posts, setPosts, department, setDepartment, topic, setTopic] = useOutletContext();
+    const [posts, setPosts, department, setDepartment, topic, setTopic, avatarUrl] = useOutletContext();
 
     let { id } = useParams();
 
@@ -51,7 +51,7 @@ export default function Post() {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                window.location.reload();
+                document.location.reload();
             })
             .catch(err => {
                 console.log(err);
@@ -255,11 +255,11 @@ export default function Post() {
                         <ThumbDownIcon fontSize='small' color={data.alreadyLiked === -1 ? 'error' : 'neutral'}/>
                     </IconButton>        
                     <span className='bold'>{data.dislikesCount}</span>
-                </div>    
+                </div>       
             </div>
             <div className='comments'>
                 <form className='comment-input' onSubmit={handleSubmit}>
-                    <Avatar />
+                    <Avatar src={avatarUrl} />
                     <input
                         type='text'
                         placeholder='Leave a comment'
