@@ -22,14 +22,16 @@ export default function Post() {
     const [modalOpen, setModalOpen] = useState(false);
     const handleOpen = () => setModalOpen(true);
 
+    function sendEmail(email) {
+        window.location.replace(`mailto:${email}`)
+    }
+
     const [comment, setComment] = useState('')
     const [posts, setPosts, department, setDepartment, topic, setTopic] = useOutletContext();
 
     let { id } = useParams();
 
     const { data, setData, error, loading } = useFetch('GET', `http://localhost:3000/api/posts/${id}`)
-
-    // const [like, setLike] = useState(null)
 
     function handleLike(event) {
 
@@ -55,10 +57,6 @@ export default function Post() {
                 console.log(err);
             })
     }
-
-    if (error) {
-        console.log(error)
-    } 
 
     useEffect(() => {
         const fetchOptions = {
@@ -181,11 +179,14 @@ export default function Post() {
         .catch(err => console.log(err)); 
     }
 
+    if (error) {
+        console.log(error)
+    } 
+
     return (
         <>
             {loading && <div>Loading...</div>}
             {data && <section className='post'>
-                {console.log(data)}
             <Link onClick={() => setDepartment(data.post.user.department)} to='/'>
                 <small className='bold'>{data.post.user.department.toUpperCase()}</small>
             </Link>
@@ -204,7 +205,8 @@ export default function Post() {
                     menuLink1='#'
                     menuIcon2={(<EmailIcon />)}
                     menuName2='Send email'
-                    menuLink2={`../mailto:${data.email}`}
+                    menuOnClick2={() => sendEmail(data.email)}        
+                    menuLink2={'#'}
                 />
                 <CustomModal
                     modalOpen={modalOpen}
