@@ -6,45 +6,6 @@ import '../utils/style/signup.css'
 import { useForm } from "react-hook-form";
 
 export default function Signin() {
-    // const [signinData, setSigninData] = useState({
-    //     "email": "",
-    //     "password": ""
-    // })
-
-    // function handleChange(event) {
-    //     setSigninData({ ...signinData, [event.target.name]: event.target.value })
-    // }
-
-    // function handleSubmit(event) {
-    //     event.preventDefault();
-
-        // const signinOptions = {
-        //     method: "POST",
-        //     headers: {
-        //         "Accept": "application/json",
-        //         "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify({
-        //         "email": signinData.email,
-        //         "password": signinData.password
-        //     })
-        // }
-
-        // fetch("http://localhost:3000/api/auth/login", signinOptions)
-        //     .then(res => {
-        //     if (res.ok) {
-        //         return res.json();
-        //     }
-        //         throw new Error("There's an error sending the data")
-        //     })
-        //     .then(data => {
-        //         sessionStorage.setItem("token", JSON.stringify(data.token))
-        //         sessionStorage.setItem("userId", JSON.stringify(data.userId))
-        //         sessionStorage.setItem("isAdmin", JSON.stringify(data.isAdmin))
-        //         document.location.href = '/';
-        //     })
-        //     .catch(err => console.log(err))
-    // }
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
@@ -71,6 +32,7 @@ export default function Signin() {
                 sessionStorage.setItem("token", JSON.stringify(data.token))
                 sessionStorage.setItem("userId", JSON.stringify(data.userId))
                 sessionStorage.setItem("isAdmin", JSON.stringify(data.isAdmin))
+                sessionStorage.setItem("imageUrl", JSON.stringify(data.imageUrl) )
                 document.location.href = '/';
             })
             .catch(err => console.log(err))
