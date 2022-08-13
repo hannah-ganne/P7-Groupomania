@@ -4,6 +4,9 @@ import Header from '../components/Header'
 import { Outlet } from 'react-router-dom'
 
 export default function Home() {
+
+    const avatarUrl = JSON.parse(sessionStorage.getItem("imageUrl"))
+
     const [posts, setPosts] = useState([])
     const [keyword, setKeyword] = useState('')
 
@@ -15,7 +18,6 @@ export default function Home() {
     const [department, setDepartment] = useState('')
     const [topic, setTopic] = useState('')
     const [loadAll, setLoadAll] = useState(false)
-    const [userId, setUserId] = useState()
 
     useEffect(() => {
         const fetchOptions = {
@@ -91,68 +93,21 @@ export default function Home() {
             .catch(err => console.log(err)); 
         }
     }, [topic])
-
-    useEffect(() => {
-        const fetchOptions = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
-            }
-        }
-
-        if (userId) {
-            fetch (`http://localhost:3000/api/posts/user/${userId}`, fetchOptions)
-            .then (res =>  {
-                if(res.ok) {
-                    return res.json();
-                }
-                throw new Error("There's an error sending the data")
-            })
-            .then (data => {
-                setPosts(data)
-            })
-            .catch(err => console.log(err)); 
-        }
-    }, [userId])
-
-    useEffect(() => {
-        const fetchOptions = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
-            }
-        }
-
-        fetch ('http://localhost:3000/api/posts', fetchOptions)
-        .then (res =>  {
-            if(res.ok) {
-                return res.json();
-            }
-            throw new Error("There's an error sending the data")
-        })
-        .then (data => {
-            setPosts(data)
-        })
-        .catch(err => console.log(err)); 
-    }, [loadAll])
     
     return (
         <>
             <Header
                 handleDrawerToggle={handleDrawerToggle}
-                setKeyword={setKeyword} 
+                setKeyword={setKeyword}
+                avatarUrl={avatarUrl}        
             />
             <Sidebar
                 mobileOpen={mobileOpen}
                 handleDrawerToggle={handleDrawerToggle}
                 setDepartment={setDepartment}
-                setLoadAll={setLoadAll} 
+                setPosts={setPosts}
             />
-            <Outlet context={[posts, setPosts, department, setDepartment, topic, setTopic, loadAll, userId, setUserId]}/>
+            <Outlet context={[posts, setPosts, department, setDepartment, topic, setTopic, avatarUrl]} />
         </>
     )
 }
