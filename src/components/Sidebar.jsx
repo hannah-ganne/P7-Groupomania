@@ -11,7 +11,30 @@ import Box from '@mui/material/Box';
 const drawerWidth = 300;
 
 
-export default function Sidebar(props) {    
+export default function Sidebar(props) {
+    
+    function loadAll() {
+        const fetchOptions = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
+            }
+        }
+
+        fetch ('http://localhost:3000/api/posts', fetchOptions)
+        .then (res =>  {
+            if(res.ok) {
+                return res.json();
+            }
+            throw new Error("There's an error sending the data")
+        })
+        .then (data => {
+            props.setPosts(data)
+        })
+        .catch(err => console.log(err)); 
+    }
 
     const menuEl = departments.map(item => {
         return <Link key={item.id} className="filter-dept" onClick={() => props.setDepartment(item.label)} to='/'>
@@ -24,7 +47,7 @@ export default function Sidebar(props) {
 
     const drawer = (
         <>
-        <Link onClick={() => props.setLoadAll(prev => !prev)} to="/">
+        <Link onClick={loadAll} to="/">
             <img className="logo" src={logo} alt="logo of groupomania" />
         </Link>
         <Link className='btn-container' to="/write">
@@ -32,9 +55,9 @@ export default function Sidebar(props) {
         </Link>
         <ul className="sidebar--menu">
             <li>
-                    <Link onClick={() => props.setLoadAll(prev => !prev)} to="/">
-                    <ForumIcon />
-                    All posts
+                <Link onClick={loadAll} to="/">
+                <ForumIcon />
+                All posts
                 </Link>
                 {menuEl}
             </li>
@@ -61,7 +84,7 @@ export default function Sidebar(props) {
                 open={props.mobileOpen}
                 onClose={props.handleDrawerToggle}
                 ModalProps={{
-                    keepMounted: true, // Better open performance on mobile.
+                    keepMounted: true, 
                 }}
                 sx={{
                     display: { xs: 'block', sm: 'block', md: 'none' },
