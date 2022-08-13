@@ -16,7 +16,6 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export default function Header(props) {
 
-    const { data, loading, error } = useFetch('GET', 'http://localhost:3000/api/auth/viewProfile')
     const [inputValue, setInputValue] = useState('')
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -33,15 +32,9 @@ export default function Header(props) {
             props.setKeyword(inputValue)
         }
     }
-
-    if (error) {
-        console.log(error)
-    }
     
     return (
     <>
-        { loading && <div>Loading...</div>}
-        {data &&
         <header className="main-header">
             <IconButton
             color="inherit"
@@ -79,7 +72,7 @@ export default function Header(props) {
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
                 >
-                    <Avatar sx={{ width: 50, height: 50 }} src={data.imageUrl} />
+                    <Avatar sx={{ width: 50, height: 50 }} src={props.avatarUrl} />
                 </IconButton>
                 <Menu
                     anchorEl={anchorEl}
@@ -151,7 +144,6 @@ export default function Header(props) {
                 </Menu>
 
                         </header>
-            }
         </>
     )
 }
