@@ -14,12 +14,16 @@ article {
 .item--text a h3 {
     margin-bottom: 10px;
     font-family: 'Montserrat', sans-serif;
-    font-size: 3vh;
+    font-size: 2.5vh;
 }
 
 .item--text--data {
     margin-bottom: 10px;
-    font-size: 2.5vh;
+    font-size: 2vh;
+}
+
+.item--description {
+    font-size: 1.7vh;
 }
 
 .item--stats {
