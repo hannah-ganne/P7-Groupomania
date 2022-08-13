@@ -11,49 +11,8 @@ import { Visibility } from '@mui/icons-material'
 
 
 export default function Signup() {
-    // const [signupData, setSignupData] = useState({
-    //     "firstName": "",
-    //     "lastName": "",
-    //     "email": "",
-    //     "password": "",
-    //     "confirmPassword": ""
-    // })
 
-    // function handleChange(event) {
-    //     setSignupData({ ...signupData, [event.target.name]: event.target.value })
-    // }
-
-    // function handleValidation() {
-    //     const nameRegex = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u
-    //     const emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-
-    // }
-    
-    // function handleSubmit(event) {
-    //     event.preventDefault();
-
-    //     const fetchOptions = {
-    //         method: "POST",
-    //         headers: {
-    //             "Accept": "application/json",
-    //             "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify(signupData)
-    //     }
-
-    //     fetch ("http://localhost:3000/api/auth/signup", fetchOptions)
-    //     .then (res =>  {
-    //         if(res.ok) {
-    //             return res.json();
-    //         }
-    //         throw new Error("There's an error sending the data")
-    //     })
-    //     .then (data => {
-    //         signinFirstTime()
-    //     })
-    //     .catch(err => console.log(err)); 
-    // }
-
+    const [isUnique, setIsUnique] = useState(true)
     const { register, handleSubmit, watch, formState: { errors }} = useForm();
     const onSubmit = data => {
 
@@ -101,9 +60,14 @@ export default function Signup() {
             if(res.ok) {
                 return res.json();
             }
-            throw new Error("There's an error sending the data")
+
+            if(res.status === 409) {
+                setIsUnique(false)
+                console.log(isUnique)
+            }
+            throw new Error(`HTTP : ${res.status} - ${res.statusText}`)
         })
-        .then (data => {
+        .then(data => {
             signinFirstTime()
         })
         .catch(err => console.log(err)); 
@@ -158,7 +122,8 @@ export default function Signup() {
                             })}
                         />
                         {errors?.email?.type === 'required' && <small>This field is required</small>}
-                        {errors?.email?.type === 'pattern' && <small>Please verify your email address again</small>}
+                        {!isUnique && <small>This email already exists</small>}
+                        {/* {errors?.email?.type === 'pattern' && <small>Please verify your email address again</small>} */}
                         <input
                             type='password'
                             placeholder='Password'
