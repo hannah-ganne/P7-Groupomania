@@ -12,7 +12,7 @@ import { useOutletContext } from 'react-router-dom';
 export default function Admin() {
 
     const { data, error, loading } = useFetch('GET', 'http://localhost:3000/api/auth/users')
-    const [posts, setPosts, userId, setUserId] = useOutletContext()
+    const [posts, setPosts] = useOutletContext()
 
     function deleteUser(userId) {
         const fetchOptions = {
