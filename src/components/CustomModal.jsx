@@ -5,7 +5,7 @@ import Avatar from '@mui/material/Avatar'
 import { useState, useEffect } from 'react'
 
 export default function CustomModal(props) {
-    const [open, setOpen] = useState(true)
+    const [open, setOpen] = useState(false)
 
     useEffect(() => {
         setOpen(props.modalOpen)
