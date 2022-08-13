@@ -48,7 +48,7 @@ export default function Write() {
             throw new Error("There's an error sending the data")
         })
         .then (data => {
-            document.location.href = '/';
+            document.location.href = `/post/${data.id}`;
         })
         .catch(err => console.log(err)); 
     }
