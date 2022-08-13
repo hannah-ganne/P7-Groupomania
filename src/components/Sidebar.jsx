@@ -27,7 +27,7 @@ export default function Sidebar(props) {
         <Link onClick={() => props.setLoadAll(prev => !prev)} to="/">
             <img className="logo" src={logo} alt="logo of groupomania" />
         </Link>
-        <Link to="/write">
+        <Link className='btn-container' to="/write">
             <Button className="sidebar--btn btn red" name="start posting" />
         </Link>
         <ul className="sidebar--menu">
