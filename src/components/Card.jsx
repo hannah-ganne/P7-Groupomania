@@ -18,7 +18,7 @@ export default function Card({ id, title, firstName, department, imageUrl, creat
                     <p className="item--text--data">
                         <span className="bold">{firstName}</span> from <span className="bold">{department}</span> posted on {dateCreated}
                     </p>
-                    <p>{description}</p>
+                    <p className='item--description'>{description}</p>
                 </Link>
                 <div className="tags">
                     <Tag tagType='department' name={department} setDepartment={setDepartment} />
@@ -26,8 +26,8 @@ export default function Card({ id, title, firstName, department, imageUrl, creat
                 </div>
             </div>    
             <div className="item--stats">
-                <p><span className="bold">{commentsCount}</span> {commentsCount <= 1 ? 'comment' : 'comments'}</p>
                 <p><span className="bold">{likesCount}</span> {likesCount <= 1 ? 'like' : 'likes'}</p>
+                <p><span className="bold">{commentsCount}</span> {commentsCount <= 1 ? 'comment' : 'comments'}</p>
             </div>
         </article>
     )
