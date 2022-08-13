@@ -11,7 +11,9 @@ export default function Card({ id, title, firstName, department, imageUrl, creat
 
     return (
         <article>
-            <Avatar className="avatar" sx={{ width: 75, height: 75 }} src={imageUrl} />
+            <Link to={`/post/${id}`}>
+                <Avatar className="avatar" sx={{ width: 75, height: 75 }} src={imageUrl} />
+            </Link>
             <div className="item--text">
                 <Link to={`/post/${id}`}>
                     <h3>{title}</h3>
