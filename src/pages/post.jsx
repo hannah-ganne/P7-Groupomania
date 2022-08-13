@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import '../utils/style/profile.css'
 import Avatar from '@mui/material/Avatar'
@@ -28,41 +28,33 @@ export default function Post() {
     let { id } = useParams();
 
     const { data, setData, error, loading } = useFetch('GET', `http://localhost:3000/api/posts/${id}`)
-    const { data: profile } = useFetch('GET', 'http://localhost:3000/api/auth/viewProfile')
 
-    const [like, setLike] = useState(null)
+    // const [like, setLike] = useState(null)
 
     function handleLike(event) {
 
         const {id: buttonId} = event.currentTarget
-        
-        if (like === '0' || like === null) {
-            setLike(buttonId)
-        } else if (buttonId === like) {
-            setLike('0')
+
+        const fetchOptions = {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`,
+            },
+            body: JSON.stringify({ "like": +buttonId })
         }
+
+        fetch(`http://localhost:3000/api/posts/${id}/like`, fetchOptions)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                window.location.reload();
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
-
-    // useEffect(() => {
-    //     const fetchOptions = {
-    //         method: "POST",
-    //         headers: {
-    //             "Accept": "application/json",
-    //             "Content-Type": "application/json",
-    //             "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`,
-    //         },
-    //         body: JSON.stringify({ "like": parseInt(like) })
-    //     }
-
-    //     fetch(`http://localhost:3000/api/posts/${id}/like`, fetchOptions)
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             console.log(data.message)
-    //         })
-    //         .catch(err => {
-    //             console.log(err);
-    //         })
-    // }, [like])
 
     if (error) {
         console.log(error)
@@ -114,7 +106,7 @@ export default function Post() {
             })
             .catch(err => console.log(err)); 
         }
-    }, [department])
+    }, [topic])
 
     function deletePost() {
 
@@ -193,7 +185,7 @@ export default function Post() {
         <>
             {loading && <div>Loading...</div>}
             {data && <section className='post'>
-                {console.log(like)}
+                {console.log(data)}
             <Link onClick={() => setDepartment(data.post.user.department)} to='/'>
                 <small className='bold'>{data.post.user.department.toUpperCase()}</small>
             </Link>
@@ -252,20 +244,20 @@ export default function Post() {
             <div className='like'>
                 <div>
                     <IconButton id='1' onClick={handleLike} >
-                        <ThumbUpIcon fontSize='small' />    
+                        <ThumbUpIcon fontSize='small' color={data.alreadyLiked === 1 ? 'success' : 'neutral'} />    
                     </IconButton>
                     <span className='bold'>{data.likesCount}</span>
                 </div>    
                 <div>
                     <IconButton id='-1' onClick={handleLike} >
-                        <ThumbDownIcon fontSize='small' />
+                        <ThumbDownIcon fontSize='small' color={data.alreadyLiked === -1 ? 'error' : 'neutral'}/>
                     </IconButton>        
                     <span className='bold'>{data.dislikesCount}</span>
                 </div>    
             </div>
             <div className='comments'>
                 <form className='comment-input' onSubmit={handleSubmit}>
-                    <Avatar src={profile.imageUrl} />
+                    <Avatar />
                     <input
                         type='text'
                         placeholder='Leave a comment'
