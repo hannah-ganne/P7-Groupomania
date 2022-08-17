@@ -40,7 +40,7 @@ export default function CustomModal(props) {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-            <Box className='profile' sx={style}>
+            <Box className="profile" sx={style}>
                 <Typography
                     id="modal-modal-title"
                     variant="h6"
@@ -53,7 +53,7 @@ export default function CustomModal(props) {
                 >
                     Profile
                 </Typography>
-                <div className='profile-info'>
+                <div className="profile-info">
                     <Avatar
                             src={props.imageUrl} 
                             sx={{ width: 120, height: 120, mr: 3 }}
@@ -69,7 +69,7 @@ export default function CustomModal(props) {
                     <span className="bold uppercase">Personally I'm interested in...</span>
                     <p>{props.interestedIn}</p>
                     <span className="bold uppercase">Describe yourself in one word</span>
-                    <p>I am {checkVowel()} <span className='bold uppercase'>{props.oneWord}</span> person</p>
+                    <p>I am {checkVowel()} <span className="bold uppercase">{props.oneWord}</span> person</p>
                     <span className="bold uppercase">I am up for...</span>
                         <p>
                             {props.isUpFor.map((item, index) => {

@@ -48,63 +48,63 @@ export const topics = [
 
     {
         id:1,
-        label: "Team Building"
+        label: 'Team Building'
     },
     {
         id:2,
-        label: "News"
+        label: 'News'
     },
     {
         id:3,
-        label: "Career"
+        label: 'Career'
     },
     {
         id:5,
-        label: "Productivity"
+        label: 'Productivity'
     },
     {
         id:6,
-        label: "Leadership"
+        label: 'Leadership'
     },
     {
         id:7,
-        label: "Communication"
+        label: 'Communication'
     },
     {
         id:8,
-        label: "Technology"
+        label: 'Technology'
     },
     {
         id:9,
-        label: "Networking"
+        label: 'Networking'
     },
     {
         id:10,
-        label: "Just for laughs"
+        label: 'Just for laughs'
     },
     {
         id:11,
-        label: "Suggestions"
+        label: 'Suggestions'
     },
     {
         id:12,
-        label: "Insight"
+        label: 'Insight'
     },
     {
         id:13,
-        label: "Industry"
+        label: 'Industry'
     },
     {
         id:14,
-        label: "Events"
+        label: 'Events'
     },
     {
         id:15,
-        label: "Learning and development"
+        label: 'Learning and development'
     },
     {
         id:16,
-        label: "Other topics"
+        label: 'Other topics'
     }
 ]
 
@@ -112,105 +112,105 @@ export const topics = [
 export const oneWord = [
     {
         id:1,
-        label:"Strategic"
+        label:'Strategic'
     },
     {
         id:2,
-        label:"Insightful"
+        label:'Insightful'
     },
     {
         id:3,
-        label:"Determined"
+        label:'Determined'
     },
     {
         id:4,
-        label:"Explorative"
+        label:'Explorative'
     },
     {
         id:5,
-        label:"Forward-looking"
+        label:'Forward-looking'
     },
     {
         id:6,
-        label:"Genuine"
+        label:'Genuine'
     },
     {
         id:7,
-        label:"Supportive"
+        label:'Supportive'
     },
     {
         id:8,
-        label:"Dedicated"
+        label:'Dedicated'
     },
     {
         id:9,
-        label:"Caring"
+        label:'Caring'
     },
     {
         id:10,
-        label:"Dependable"
+        label:'Dependable'
     },
     {
         id:11,
-        label:"Nurturing"
+        label:'Nurturing'
     },
     {
         id:12,
-        label:"Easy-going"
+        label:'Easy-going'
     },
     {
         id:13,
-        label:"Artistic"
+        label:'Artistic'
     },
     {
         id:14,
-        label:"Exciting"
+        label:'Exciting'
     },
     {
         id:15,
-        label:"Entertaining"
+        label:'Entertaining'
     }
     ]
 
 export const isUpFor = [
     {
         id: 1,
-        label: "Coffee chat",
+        label: 'Coffee chat',
         checked: false
     },
     {
         id: 2,
-        label: "Zoom meetings",
+        label: 'Zoom meetings',
         checked: false
     },
     {
         id: 3,
-        label: "Conferences",
+        label: 'Conferences',
         checked: false
     },
     {
         id: 4,
-        label: "Office parties",
+        label: 'Office parties',
         checked: false
     },
     {
         id: 5,
-        label: "Collaborations",
+        label: 'Collaborations',
         checked: false
     },
     {
         id: 6,
-        label: "Afterwork happy hour",
+        label: 'Afterwork happy hour',
         checked: false
     },
     {
         id: 7,
-        label: "Lunch meeting",
+        label: 'Lunch meeting',
         checked: false
     },
     {
         id: 8,
-        label: "Book club",
+        label: 'Book club',
         checked: false
     }
 ]

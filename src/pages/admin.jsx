@@ -16,11 +16,11 @@ export default function Admin() {
 
     function deleteUser(userId) {
         const fetchOptions = {
-            method: "DELETE",
+            method: 'DELETE',
             headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('token'))}`
             }
         }
 
@@ -29,10 +29,10 @@ export default function Admin() {
             if(res.ok) {
                 return res.json();
             }
-            throw new Error("There's an error sending the data")
+            throw new Error(`There's an error sending the data`)
         })
         .then(data => {
-            document.location.href = `/admin`;
+            document.location.href = '/admin';
         })
         .catch(err => console.log(err)); 
     }
@@ -46,12 +46,12 @@ export default function Admin() {
         <div className="user-info" id={props.id}>
             <Avatar src={props.imageUrl} />
             <p>
-                <span className='bold'>{`${props.firstName} ${props.lastName}`}</span>
+                <span className="bold">{`${props.firstName} ${props.lastName}`}</span>
                 from {props.department ? <span className='bold'>{props.department}</span> : 'undefined '}
                 joined on <span className='bold'>{new Date(props.createdAt).getDate() + '/' + (new Date(props.createdAt).getMonth()+1) + '/' + new Date(props.createdAt).getFullYear()}</span>        
             </p>        
-            <IconButton className='delete-icon' onClick={(e) => deleteUser(e.target.closest('div').id)}>
-                <DeleteIcon fontSize='medium' />
+            <IconButton className="delete-icon" onClick={(e) => deleteUser(e.target.closest('div').id)}>
+                <DeleteIcon fontSize="medium" />
             </IconButton>
         </div>
         )
@@ -64,8 +64,8 @@ export default function Admin() {
     return (
         <>
             { loading && <div>Loading...</div> }
-            { data && <section className='profile'>
-            <h2 className='profile-title'>Admin Dashboard</h2>
+            { data && <section className="profile">
+            <h2 className="profile-title">Admin Dashboard</h2>
                 {data.map(user => {
                     return <UserInfo
                             key={user.id}    

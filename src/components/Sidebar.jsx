@@ -15,11 +15,11 @@ export default function Sidebar(props) {
     
     function loadAll() {
         const fetchOptions = {
-            method: "GET",
+            method: 'GET',
             headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
+                'Accep': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('token'))}`
             }
         }
 
@@ -28,7 +28,7 @@ export default function Sidebar(props) {
             if(res.ok) {
                 return res.json();
             }
-            throw new Error("There's an error sending the data")
+            throw new Error(`There's an error sending the data`)
         })
         .then (data => {
             props.setPosts(data)
@@ -37,7 +37,12 @@ export default function Sidebar(props) {
     }
 
     const menuEl = departments.map(item => {
-        return <Link key={item.id} className="filter-dept" onClick={() => props.setDepartment(item.label)} to='/'>
+        return <Link
+                key={item.id}
+                className="filter-dept"
+                onClick={() => props.setDepartment(item.label)}
+                to="/"
+                >
                     <div key={item.id} >
                     {item.icon}
                     {item.label}
@@ -50,7 +55,7 @@ export default function Sidebar(props) {
         <Link onClick={loadAll} to="/">
             <img className="logo" src={logo} alt="logo of groupomania" />
         </Link>
-        <Link className='btn-container' to="/write">
+        <Link className="btn-container" to="/write">
             <Button className="sidebar--btn btn red" name="start posting" />
         </Link>
         <ul className="sidebar--menu">

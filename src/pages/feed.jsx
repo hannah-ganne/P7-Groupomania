@@ -10,11 +10,11 @@ export default function Feed() {
 
     useEffect(() => {
         const fetchOptions = {
-            method: "GET",
+            method: 'GET',
             headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('token'))}`
             }
         }
 
@@ -23,7 +23,7 @@ export default function Feed() {
             if(res.ok) {
                 return res.json();
             }
-            throw new Error("There's an error sending the data")
+            throw new Error(`There's an error sending the data`)
         })
         .then (data => {
             setPosts(data)
@@ -33,11 +33,11 @@ export default function Feed() {
 
     useEffect(() => {
         const fetchOptions = {
-            method: "GET",
+            method: 'GET',
             headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('token'))}`
             }
         }
 
@@ -47,7 +47,7 @@ export default function Feed() {
                 if(res.ok) {
                     return res.json();
                 }
-                throw new Error("There's an error sending the data")
+                throw new Error(`There's an error sending the data`)
             })
             .then (data => {
                 setPosts(data)
@@ -58,11 +58,11 @@ export default function Feed() {
 
     useEffect(() => {
         const fetchOptions = {
-            method: "GET",
+            method: 'GET',
             headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('token'))}`
             }
         }
 
@@ -72,7 +72,7 @@ export default function Feed() {
                 if(res.ok) {
                     return res.json();
                 }
-                throw new Error("There's an error sending the data")
+                throw new Error(`There's an error sending the data`)
             })
             .then (data => {
                 setPosts(data)

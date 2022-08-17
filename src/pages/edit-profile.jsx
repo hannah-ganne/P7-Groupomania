@@ -1,4 +1,3 @@
-// import Avatar from '../components/Avatar'
 import Avatar from '@mui/material/Avatar'
 import '../utils/style/profile.css'
 import Button from '../components/Button'
@@ -52,11 +51,11 @@ export default function EditProfile() {
 
     function deleteAccount() {
         const fetchOptions = {
-            method: "DELETE",
+            method: 'DELETE',
             headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('token'))}`
             }
         }
 
@@ -65,7 +64,7 @@ export default function EditProfile() {
             if(res.ok) {
                 return res.json();
             }
-            throw new Error("There's an error sending the data")
+            throw new Error(`There's an error sending the data`)
         })
         .then (data => {
             document.location.href = '/signup';
@@ -131,20 +130,20 @@ export default function EditProfile() {
 
         let input = document.getElementById('modify-profile')
         let formData = new FormData();
-        formData.append("firstName", data.firstName);
-        formData.append("lastName", data.lastName);
-        formData.append("department", data.department);
-        formData.append("expertIn", data.expertIn);
-        formData.append("interestedIn", data.interestedIn);
-        formData.append("oneWord", data.oneWord);
-        formData.append("isUpFor", JSON.stringify(data.isUpFor))
-        formData.append("image", input.files[0]);
+        formData.append('firstName', data.firstName);
+        formData.append('lastName', data.lastName);
+        formData.append('department', data.department);
+        formData.append('expertIn', data.expertIn);
+        formData.append('interestedIn', data.interestedIn);
+        formData.append('oneWord', data.oneWord);
+        formData.append('isUpFor', JSON.stringify(data.isUpFor))
+        formData.append('image', input.files[0]);
 
         const fetchOptions = {
-            method: "PUT",
+            method: 'PUT',
             headers: {
-                "Accept": "application/json",
-                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('token'))}`
             },
             body: formData
         }
@@ -154,7 +153,7 @@ export default function EditProfile() {
             if(res.ok) {
                 return res.json();
             }
-            throw new Error("There's an error sending the data")
+            throw new Error(`There's an error sending the data`)
         })
         .then (data => {
             document.location.href = './';
@@ -169,11 +168,11 @@ export default function EditProfile() {
     return (
         <>
         { loading && <div>Loading...</div> }
-        { data && <section className='profile'>
-            <h2 className='profile-title'>Profile</h2>
+        { data && <section className="profile">
+            <h2 className="profile-title">Profile</h2>
             <form onSubmit={handleSubmit} >
-                <div className='profile-info'>
-                    <div className='profile-avatar'>
+                <div className="profile-info">
+                    <div className="profile-avatar">
                         <Avatar
                             sx={{
                                 width: 140,
@@ -181,62 +180,62 @@ export default function EditProfile() {
                                 mr: 5
                                 }}
                             src={img ? img : data.imageUrl} />
-                        <label htmlFor='modify-profile' className='btn pink avatar-btn'>
+                        <label htmlFor="modify-profile" className="btn pink avatar-btn">
                             Modify
                         </label>
-                        <input type='file' name='image' id='modify-profile' accept='image/png, image/jpeg, image/gif' onChange={onImageChange}/>   
+                        <input type="file" name="image" id="modify-profile" accept="image/png, image/jpeg, image/gif" onChange={onImageChange}/>   
                     </div>     
                     <div>
                         <p>
-                            <span className='bold'>First Name: </span>
-                            <input type='text' placeholder={data.firstName} name='firstName' value={data.firstName} onChange={handleChange} required></input>
+                            <span className="bold">First Name: </span>
+                            <input type="text" placeholder={data.firstName} name="firstName" value={data.firstName} onChange={handleChange} required></input>
                         </p>
                         <p>
-                            <span className='bold'>Last Name: </span>
-                            <input type='text' placeholder={data.lastName} name='lastName' value={data.lastName} onChange={handleChange} required></input>
+                            <span className="bold">Last Name: </span>
+                            <input type="text" placeholder={data.lastName} name="lastName" value={data.lastName} onChange={handleChange} required></input>
                         </p>
                         <p>
-                                <span className='bold'>Department: </span>
-                                <select name='department' value={data.department} onChange={handleChange} required>
-                                    <option value=''>Choose your department</option>
+                                <span className="bold">Department: </span>
+                                <select name="department" value={data.department} onChange={handleChange} required>
+                                    <option value="">Choose your department</option>
                                     {deptEl}
                                 </select>
                         </p>
                     </div>
                 </div>
-                <div className='profile-detail'>
-                    <span className='bold uppercase'>At work I'm expert in...</span>
+                <div className="profile-detail">
+                    <span className="bold uppercase">At work I'm expert in...</span>
                         <input
-                            type='text'
+                            type="text"
                             placeholder={data.expertIn}
-                            name='expertIn'
+                            name="expertIn"
                             value={data.expertIn}
                             onChange={handleChange}
                             required
                         >
                         </input>
                         
-                    <span className='bold uppercase'>Personally I'm interested in...</span>
+                    <span className="bold uppercase">Personally I"m interested in...</span>
                         <input
-                            type='text'
+                            type="text"
                             placeholder={data.interestedIn}
-                            name='interestedIn'
+                            name="interestedIn"
                             value={data.interestedIn}
                             onChange={handleChange}
                             required
                         >
                         </input>
 
-                    <span className='bold uppercase'>Describe yourself in one word</span>
-                    <div className='oneWord' value={data.oneWord} onChange={handleChange}>
+                    <span className="bold uppercase">Describe yourself in one word</span>
+                    <div className="oneWord" value={data.oneWord} onChange={handleChange}>
                             {oneWord.map(word => {
                             return (
                                 <div key={word.id}>
                                     <input
-                                        type='radio'
+                                        type="radio"
                                         key={word.id}
                                         id={word.id}
-                                        name='oneWord'
+                                        name="oneWord"
                                         value={word.label}
                                         checked={word.label === data.oneWord}
                                     />
@@ -251,8 +250,8 @@ export default function EditProfile() {
                             })}
                     </div>
                         
-                    <span className='bold uppercase'>I am up for...</span>
-                    <div className='isUpFor'>
+                    <span className="bold uppercase">I am up for...</span>
+                    <div className="isUpFor">
                         {data.isUpFor.map((item, index) => {
                             return <Checkbox
                                 key={item.label}
@@ -263,12 +262,12 @@ export default function EditProfile() {
                             />
                         })}
                     </div>
-                    <Link className='delete-account font-red bold' to='#' onClick={handleOpen}>
+                    <Link className="delete-account font-red bold" to="#" onClick={handleOpen}>
                         <p>Delete my account</p>
                     </Link>
                     <ModalWarning />    
                 </div>
-                <Button className='btn red' name='Confirm changes' type='submit' /> 
+                <Button className="btn red" name="Confirm changes" type="submit" /> 
             </form>
     </section>
     }

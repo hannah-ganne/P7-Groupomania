@@ -40,6 +40,11 @@ h3 {
 }
 
 @media screen and (max-width: 600px) {
+
+    article > a > .avatar {
+        display: none;
+    }
+
     article > div:first-child, .tags {
         display: none;
     } 

@@ -19,43 +19,43 @@ export default function Signup() {
         function signinFirstTime() {
 
             const signinOptions = {
-                method: "POST",
+                method: 'POST',
                 headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json",
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    "email": data.email,
-                    "password": data.password
+                    'email': data.email,
+                    'password': data.password
                 })
             }
     
-            fetch("http://localhost:3000/api/auth/login", signinOptions)
+            fetch('http://localhost:3000/api/auth/login', signinOptions)
             .then(res => {
                 if (res.ok) {
                     return res.json();
                 }
-                throw new Error("There's an error sending the data")
+                throw new Error(`There's an error sending the data`)
             })
                 .then(data => {
-                sessionStorage.setItem("token", JSON.stringify(data.token))
-                sessionStorage.setItem("userId", JSON.stringify(data.userId))
-                sessionStorage.setItem("isAdmin", JSON.stringify(data.isAdmin))
+                sessionStorage.setItem('token', JSON.stringify(data.token))
+                sessionStorage.setItem('userId', JSON.stringify(data.userId))
+                sessionStorage.setItem('isAdmin', JSON.stringify(data.isAdmin))
                 document.location.href = './profile/edit';
             })
             .catch(err => console.log(err))
     }
 
         const fetchOptions = {
-            method: "POST",
+            method: 'POST',
             headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify(data)
         }
 
-        fetch ("http://localhost:3000/api/auth/signup", fetchOptions)
+        fetch ('http://localhost:3000/api/auth/signup', fetchOptions)
         .then (res =>  {
             if(res.ok) {
                 return res.json();
@@ -88,10 +88,9 @@ export default function Signup() {
                     <h2>Sign up</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <input
-                            placeholder='First Name'
-                            name='firstName'
-                            // value={signupData.firstName}
-                            // onChange={handleChange}
+                            placeholder="First Name"
+                            name="firstName"
+
                             {...register('firstName', {
                                 pattern: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
                                 required: true
@@ -100,10 +99,8 @@ export default function Signup() {
                         {errors?.firstName?.type === 'required' && <small>This field is required</small>}
                         {errors?.firstName?.type === 'pattern' && <small>Only alphabetical characters are allowed</small>}
                         <input
-                            placeholder='Last Name'
-                            name='lastName'
-                            // value={signupData.lastName}
-                            // onChange={handleChange}
+                            placeholder="Last Name"
+                            name="lastName"
                             {...register('lastName', {
                                 pattern: /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
                                 required: true
@@ -112,24 +109,19 @@ export default function Signup() {
                         {errors?.lastName?.type === 'required' && <small>This field is required</small>}
                         {errors?.lastName?.type === 'pattern' && <small>Only alphabetical characters are allowed</small>}
                         <input
-                            placeholder='Email Address'
-                            type='email'
-                            name='email'
-                            // value={signupData.email}
-                            // onChange={handleChange}
+                            placeholder="Email Address"
+                            type="email"
+                            name="email"
                             {...register('email', {
                                 required: true
                             })}
                         />
                         {errors?.email?.type === 'required' && <small>This field is required</small>}
                         {!isUnique && <small>This email already exists</small>}
-                        {/* {errors?.email?.type === 'pattern' && <small>Please verify your email address again</small>} */}
                         <input
-                            type='password'
-                            placeholder='Password'
-                            name='password'
-                            // value={signupData.password}
-                            // onChange={handleChange}
+                            type="password"
+                            placeholder="Password"
+                            name="password"
                             {...register('password', {
                                 required: "You must specify a password",
                                 minLength: 8,
@@ -143,10 +135,8 @@ export default function Signup() {
                         {errors?.password?.type === 'pattern' && <small>Password must contain at least 2 digits, 1 uppercase and 1 lowercase letter.</small>}
                         <input
                             type="password"
-                            placeholder='Confirm password'
-                            name='confirmPassword'
-                            // value={signupData.confirmPassword}
-                            // onChange={handleChange}
+                            placeholder="Confirm password"
+                            name="confirmPassword"
                             required
                             {...register('confirmPassword', {
                                 required: true,
@@ -160,7 +150,7 @@ export default function Signup() {
                         />
                         {errors?.confirmPassword && <small>Passwords do not match</small>}
                         <Button className="btn red" name="Sign up" type="submit" />
-                        <p>Already have an account? <Link to="/signin" className='bold'>Sign in!</Link></p>
+                        <p>Already have an account? <Link to="/signin" className="bold">Sign in!</Link></p>
                     </form>
                 </div>
             </main>

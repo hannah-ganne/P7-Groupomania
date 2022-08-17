@@ -10,10 +10,10 @@ export default function Signin() {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
         const signinOptions = {
-            method: "POST",
+            method: 'POST',
             headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 "email": data.email,
@@ -26,13 +26,13 @@ export default function Signin() {
             if (res.ok) {
                 return res.json();
             }
-                throw new Error("There's an error sending the data")
+                throw new Error(`There's an error sending the data`)
             })
             .then(data => {
-                sessionStorage.setItem("token", JSON.stringify(data.token))
-                sessionStorage.setItem("userId", JSON.stringify(data.userId))
-                sessionStorage.setItem("isAdmin", JSON.stringify(data.isAdmin))
-                sessionStorage.setItem("imageUrl", JSON.stringify(data.imageUrl) )
+                sessionStorage.setItem('token', JSON.stringify(data.token))
+                sessionStorage.setItem('userId', JSON.stringify(data.userId))
+                sessionStorage.setItem('isAdmin', JSON.stringify(data.isAdmin))
+                sessionStorage.setItem('imageUrl', JSON.stringify(data.imageUrl) )
                 document.location.href = '/';
             })
             .catch(err => console.log(err))
@@ -51,24 +51,20 @@ export default function Signin() {
                     <h2>Sign in</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <input
-                            placeholder='Email Address'
-                            type='email'
-                            name='email'
+                            placeholder="Email Address"
+                            type="email"
+                            name="email"
                             {...register('email', {
                                 required: true
                             })}
-                            // value={signinData.email}
-                            // onChange={handleChange} 
                         />
                         {errors?.email?.type === 'required' && <small>This field is required</small>}
                         <input
-                            type='password'
-                            placeholder='Password'
-                            name='password'
-                            // value={signinData.password}
-                            // onChange={handleChange} 
+                            type="password"
+                            placeholder="Password"
+                            name="password"
                             {...register('password', {
-                                required: "You must specify a password",
+                                required: 'You must specify a password',
                                 minLength: 8,
                                 maxLength: 20,
                                 pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.{2,}\d)[A-Za-z\d]{8,20}$/g,

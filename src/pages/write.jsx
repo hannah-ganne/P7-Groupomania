@@ -5,9 +5,9 @@ import { useState } from 'react'
 
 export default function Write() {
     const [myPost, setMyPost] = useState({
-        title: "",
-        topic: "",
-        description: ""
+        title: '',
+        topic: '',
+        description: ''
     })
 
     const topicEl = topics.map(topic => {
@@ -25,17 +25,16 @@ export default function Write() {
 
         let input = document.getElementById('image-upload')
         let formData = new FormData();
-        formData.append("title", myPost.title);
-        formData.append("topic", myPost.topic);
-        formData.append("description", myPost.description);
-        formData.append("image", input.files[0]);
+        formData.append('title', myPost.title);
+        formData.append('topic', myPost.topic);
+        formData.append('description', myPost.description);
+        formData.append('image', input.files[0]);
 
         const fetchOptions = {
-            method: "POST",
+            method: 'POST',
             headers: {
-                "Accept": "application/json",
-                // "content-type": "multipart/form-data",
-                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('token'))}`
             },
             body: formData
         }
@@ -45,7 +44,7 @@ export default function Write() {
             if(res.ok) {
                 return res.json();
             }
-            throw new Error("There's an error sending the data")
+            throw new Error(`There's an error sending the data`)
         })
         .then (data => {
             document.location.href = `/post/${data.id}`;
@@ -54,20 +53,20 @@ export default function Write() {
     }
 
     return (
-        <section className='write'>
+        <section className="write">
             <form onSubmit={handleSubmit}>
-                <input type='text' placeholder='Title' name='title' value={myPost.title} onChange={handleChange} required />
-                <select name='topic' value={myPost.topic} onChange={handleChange} required>
-                    <option value=''>Select topic</option>
+                <input type="text" placeholder="Title" name="title" value={myPost.title} onChange={handleChange} required />
+                <select name="topic" value={myPost.topic} onChange={handleChange} required>
+                    <option value="">Select topic</option>
                     {topicEl}
                 </select>
                 <textarea
-                    rows='30'
-                    cols='100'
-                    placeholder='Start writing about the topic you chose.
+                    rows="30"
+                    cols="100"
+                    placeholder="Start writing about the topic you chose.
                     Please be respectful of your co-workers and use respectful language.
-                    If deemed inappropriate, the forum moderator can intervene.'
-                    name='description'
+                    If deemed inappropriate, the forum moderator can intervene."
+                    name="description"
                     value={myPost.description}
                     onChange={handleChange}>    
                 </textarea>

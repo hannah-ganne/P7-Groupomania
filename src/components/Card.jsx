@@ -20,11 +20,11 @@ export default function Card({ id, title, firstName, department, imageUrl, creat
                     <p className="item--text--data">
                         <span className="bold">{firstName}</span> from <span className="bold">{department}</span> posted on {dateCreated}
                     </p>
-                    <p className='item--description'>{description}</p>
+                    <p className="item--description">{description}</p>
                 </Link>
                 <div className="tags">
-                    <Tag tagType='department' name={department} setDepartment={setDepartment} />
-                    <Tag tagType='topic' name={topic} setTopic={setTopic} />
+                    <Tag tagType="department" name={department} setDepartment={setDepartment} />
+                    <Tag tagType="topic" name={topic} setTopic={setTopic} />
                 </div>
             </div>    
             <div className="item--stats">

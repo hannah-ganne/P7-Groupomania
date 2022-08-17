@@ -1,8 +1,6 @@
 import '../utils/style/profile.css'
 import Button from '../components/Button'
 import Avatar from '@mui/material/Avatar'
-// import Avatar from '../components/Avatar'
-
 import { Link } from 'react-router-dom'
 import useFetch from '../utils/hooks/useFetch'
 import Chip from '@mui/material/Chip';
@@ -53,7 +51,7 @@ export default function Profile() {
                 <span className="bold uppercase">Personally I'm interested in...</span>
                     {!data.interestedIn ? suggestion : <p>{data.interestedIn}</p>}
                 <span className="bold uppercase">Describe yourself in one word</span>
-                    {!data.oneWord ? suggestion : <p>I am {(checkVowel())} <span className='bold uppercase'>{data.oneWord}</span> person</p>}
+                    {!data.oneWord ? suggestion : <p>I am {(checkVowel())} <span className="bold uppercase">{data.oneWord}</span> person</p>}
                 <span className="bold uppercase">I am up for...</span>
                     <div>
                         <Stack direction="row" spacing={1}>

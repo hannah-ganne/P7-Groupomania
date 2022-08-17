@@ -53,7 +53,7 @@ export default function Header(props) {
                             <SearchIcon />                                                
                         </InputAdornment>
                     }
-                    placeholder='Search forum...'
+                    placeholder="Search forum..."
                     sx={{
                         fontFamily: 'Lato',
                     }}
@@ -114,7 +114,8 @@ export default function Header(props) {
                         <MenuItem
                             sx={{ fontFamily: 'Lato' }}
                             component={Link}
-                            to='/admin'>
+                            to="/admin"
+                        >
                         <ListItemIcon>
                             <AccountCircleIcon fontSize="small"/>     
                         </ListItemIcon>
@@ -124,7 +125,8 @@ export default function Header(props) {
                     <MenuItem
                         sx={{ fontFamily: 'Lato' }}
                         component={Link}
-                        to='/profile'>
+                        to="/profile"
+                    >
                     <ListItemIcon>
                         <AccountCircleIcon fontSize="small"/>     
                     </ListItemIcon>    
@@ -134,7 +136,7 @@ export default function Header(props) {
                         sx={{ fontFamily: 'Lato' }}
                         component={Link}
                         onClick={() => sessionStorage.clear()}
-                        to='/signin'
+                        to="/signin"
                     >
                         <ListItemIcon>
                             <Logout fontSize="small" />
