@@ -25,7 +25,7 @@ export default function Post() {
     }
 
     const [comment, setComment] = useState('')
-    const { setPosts, department, setDepartment, topic, setTopic, avatarUrl } = useOutletContext();
+    const [posts, setPosts, department, setDepartment, topic, setTopic, avatarUrl] = useOutletContext();
 
     let { id } = useParams();
 
@@ -248,6 +248,7 @@ export default function Post() {
             />
             <div className="comments">
                 <form className="comment-input" onSubmit={handleSubmit}>
+                    {console.log(avatarUrl)}    
                     <Avatar src={avatarUrl} />
                     <input
                         aria-label="input-comment"    
