@@ -1,14 +1,9 @@
 import logo from '../assets/icon-left-font-monochrome-black.svg'
 import Button from '../components/Button'
 import { Link } from 'react-router-dom'
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import '../utils/style/signup.css'
 import { useForm } from "react-hook-form";
-import Input from '@mui/material/Input';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import { InputAdornment } from '@mui/material'
-import { Visibility } from '@mui/icons-material'
-
 
 export default function Signup() {
 
@@ -88,6 +83,7 @@ export default function Signup() {
                     <h2>Sign up</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <input
+                            aria-label="input-first-name"
                             placeholder="First Name"
                             name="firstName"
 
@@ -99,6 +95,7 @@ export default function Signup() {
                         {errors?.firstName?.type === 'required' && <small>This field is required</small>}
                         {errors?.firstName?.type === 'pattern' && <small>Only alphabetical characters are allowed</small>}
                         <input
+                            aria-label="input-last-name"
                             placeholder="Last Name"
                             name="lastName"
                             {...register('lastName', {
@@ -109,6 +106,7 @@ export default function Signup() {
                         {errors?.lastName?.type === 'required' && <small>This field is required</small>}
                         {errors?.lastName?.type === 'pattern' && <small>Only alphabetical characters are allowed</small>}
                         <input
+                            aria-label="input-email-address"
                             placeholder="Email Address"
                             type="email"
                             name="email"
@@ -119,6 +117,7 @@ export default function Signup() {
                         {errors?.email?.type === 'required' && <small>This field is required</small>}
                         {!isUnique && <small>This email already exists</small>}
                         <input
+                            aria-label="input-password"
                             type="password"
                             placeholder="Password"
                             name="password"
@@ -134,6 +133,7 @@ export default function Signup() {
                         {errors?.password?.type === 'maxLength' && <small>Password cannot have more than 20 characters</small>}
                         {errors?.password?.type === 'pattern' && <small>Password must contain at least 2 digits, 1 uppercase and 1 lowercase letter.</small>}
                         <input
+                            aria-label="input-password-confirm"
                             type="password"
                             placeholder="Confirm password"
                             name="confirmPassword"

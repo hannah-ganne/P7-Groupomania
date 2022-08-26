@@ -174,6 +174,7 @@ export default function EditProfile() {
                 <div className="profile-info">
                     <div className="profile-avatar">
                         <Avatar
+                            alt="current user's avatar"    
                             sx={{
                                 width: 140,
                                 height: 140,
@@ -183,16 +184,38 @@ export default function EditProfile() {
                         <label htmlFor="modify-profile" className="btn pink avatar-btn">
                             Modify
                         </label>
-                        <input type="file" name="image" id="modify-profile" accept="image/png, image/jpeg, image/gif" onChange={onImageChange}/>   
+                        <input
+                            type="file"
+                            name="image"
+                            id="modify-profile"
+                            accept="image/png, image/jpeg, image/gif"
+                            onChange={onImageChange}
+                        />   
                     </div>     
                     <div>
                         <p>
                             <span className="bold">First Name: </span>
-                            <input type="text" placeholder={data.firstName} name="firstName" value={data.firstName} onChange={handleChange} required></input>
+                            <input
+                                aria-label="input-first-name"    
+                                type="text"
+                                placeholder={data.firstName}
+                                name="firstName"
+                                value={data.firstName}
+                                onChange={handleChange}
+                                required
+                            ></input>
                         </p>
                         <p>
                             <span className="bold">Last Name: </span>
-                            <input type="text" placeholder={data.lastName} name="lastName" value={data.lastName} onChange={handleChange} required></input>
+                            <input
+                                aria-label="input-last-name"
+                                type="text"
+                                placeholder={data.lastName}
+                                name="lastName"
+                                value={data.lastName}
+                                onChange={handleChange}
+                                required
+                            ></input>
                         </p>
                         <p>
                                 <span className="bold">Department: </span>
@@ -206,6 +229,7 @@ export default function EditProfile() {
                 <div className="profile-detail">
                     <span className="bold uppercase">At work I'm expert in...</span>
                         <input
+                            aria-label="input-expertise"
                             type="text"
                             placeholder={data.expertIn}
                             name="expertIn"
@@ -217,6 +241,7 @@ export default function EditProfile() {
                         
                     <span className="bold uppercase">Personally I"m interested in...</span>
                         <input
+                            aria-label="input-interests"
                             type="text"
                             placeholder={data.interestedIn}
                             name="interestedIn"

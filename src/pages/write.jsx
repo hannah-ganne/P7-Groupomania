@@ -55,7 +55,7 @@ export default function Write() {
     return (
         <section className="write">
             <form onSubmit={handleSubmit}>
-                <input type="text" placeholder="Title" name="title" value={myPost.title} onChange={handleChange} required />
+                <input type="text" placeholder="Title" name="title" value={myPost.title} onChange={handleChange} aria-label="input-title" required />
                 <select name="topic" value={myPost.topic} onChange={handleChange} required>
                     <option value="">Select topic</option>
                     {topicEl}
@@ -68,7 +68,9 @@ export default function Write() {
                     If deemed inappropriate, the forum moderator can intervene."
                     name="description"
                     value={myPost.description}
-                    onChange={handleChange}>    
+                    onChange={handleChange}
+                    aria-label="input-text"
+                >    
                 </textarea>
                 <div>
                     <label htmlFor="image-upload" className="custom-image-upload btn">

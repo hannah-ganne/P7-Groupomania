@@ -109,6 +109,7 @@ input[type="file"] {
 }
 
 .delete-account p {
+    font-size: 18.67px;
     margin-top: 2em;
     color: var(--primary-color);
 }

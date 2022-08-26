@@ -3,16 +3,10 @@ import Avatar from '@mui/material/Avatar'
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import '../utils/style/components.css'
-import { useState, useEffect } from 'react'
-import DropdownMenu from '../components/DropdownMenu'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import CustomModal from '../components/CustomModal'
-import { useOutletContext } from 'react-router-dom';
 
 export default function Admin() {
 
     const { data, error, loading } = useFetch('GET', 'http://localhost:3000/api/auth/users')
-    const [posts, setPosts] = useOutletContext()
 
     function deleteUser(userId) {
         const fetchOptions = {
@@ -39,19 +33,16 @@ export default function Admin() {
 
     function UserInfo(props) {
 
-        const [modalOpen, setModalOpen] = useState(false);
-        const handleOpen = () => setModalOpen(true);
-
         return (
         <div className="user-info" id={props.id}>
-            <Avatar src={props.imageUrl} />
+            <Avatar src={props.imageUrl} alt="user's avatar"/>
             <p>
                 <span className="bold">{`${props.firstName} ${props.lastName}`}</span>
                 from {props.department ? <span className='bold'>{props.department}</span> : 'undefined '}
                 joined on <span className='bold'>{new Date(props.createdAt).getDate() + '/' + (new Date(props.createdAt).getMonth()+1) + '/' + new Date(props.createdAt).getFullYear()}</span>        
             </p>        
             <IconButton className="delete-icon" onClick={(e) => deleteUser(e.target.closest('div').id)}>
-                <DeleteIcon fontSize="medium" />
+                <DeleteIcon fontSize="medium" aria-label="delete-button" />
             </IconButton>
         </div>
         )

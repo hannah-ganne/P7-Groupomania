@@ -32,6 +32,7 @@ export default function Profile() {
             <div className="profile-info">
                 <div className="profile-avatar-readonly">
                     <Avatar
+                        alt="current user's avatar"    
                         sx={{
                             width: 120,
                             height: 120,

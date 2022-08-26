@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import '../utils/style/profile.css'
 import Avatar from '@mui/material/Avatar'
@@ -25,11 +25,11 @@ export default function Post() {
     }
 
     const [comment, setComment] = useState('')
-    const [posts, setPosts, department, setDepartment, topic, setTopic, avatarUrl] = useOutletContext();
+    const { setPosts, department, setDepartment, topic, setTopic, avatarUrl } = useOutletContext();
 
     let { id } = useParams();
 
-    const { data, setData, error, loading } = useFetch('GET', `http://localhost:3000/api/posts/${id}`)
+    const { data, error, loading } = useFetch('GET', `http://localhost:3000/api/posts/${id}`)
 
     function handleLike(event) {
 
@@ -77,7 +77,7 @@ export default function Post() {
             })
             .catch(err => console.log(err)); 
         }
-    }, [department])
+    }, [department, setPosts])
 
     useEffect(() => {
         const fetchOptions = {
@@ -88,7 +88,7 @@ export default function Post() {
                 'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('token'))}`
             }
         }
-        if (department) {
+        if (topic) {
             fetch (`http://localhost:3000/api/posts/topic/${topic}`, fetchOptions)
             .then (res =>  {
                 if(res.ok) {
@@ -101,7 +101,7 @@ export default function Post() {
             })
             .catch(err => console.log(err)); 
         }
-    }, [topic])
+    }, [topic, setPosts])
 
     function deletePost() {
 
@@ -195,7 +195,7 @@ export default function Post() {
             <div className="post-info-container">
                 <div className="post-info">
                 <DropdownMenu
-                    button={(<Avatar src={data.post.user.imageUrl} />)}
+                    button={(<Avatar src={data.post.user.imageUrl} alt="current post owner's avatar" />)}
                     menuIcon1={(<AccountCircleIcon />)}
                     menuName1="View profile"
                     menuOnClick1={handleOpen}
@@ -224,7 +224,7 @@ export default function Post() {
                         (data.post.userId === JSON.parse(sessionStorage.getItem("userId")) || JSON.parse(sessionStorage.getItem("isAdmin")))
                         && (
                         <DropdownMenu
-                        button={(<MoreVertIcon />)}
+                        button={(<MoreVertIcon aria-label="more-button"/>)}
                         menuIcon1={(<EditIcon />)} 
                         menuName1="Edit post"
                         menuLink1="./edit"
@@ -250,6 +250,7 @@ export default function Post() {
                 <form className="comment-input" onSubmit={handleSubmit}>
                     <Avatar src={avatarUrl} />
                     <input
+                        aria-label="input-comment"    
                         type="text"
                         placeholder="Leave a comment"
                         value={comment}

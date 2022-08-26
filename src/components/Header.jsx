@@ -11,8 +11,8 @@ import Input from '@mui/material/Input';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import { Link } from 'react-router-dom'
-import useFetch from '../utils/hooks/useFetch'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { InputLabel } from '@mui/material';
 
 export default function Header(props) {
 
@@ -47,21 +47,25 @@ export default function Header(props) {
             </IconButton>
                     
             <div className="search-bar">   
-                <Input
-                    startAdornment={
-                        <InputAdornment position="start">
-                            <SearchIcon />                                                
-                        </InputAdornment>
-                    }
-                    placeholder="Search forum..."
-                    sx={{
-                        fontFamily: 'Lato',
-                    }}
-                    fullWidth
-                    value={inputValue}
-                            onChange={event => setInputValue(event.target.value)}
-                            onKeyPress={handleKeyPress}
-                />
+                <InputLabel htmlFor="search-input">      
+                    <Input
+                        id="search-input"
+                        startAdornment={
+                            <InputAdornment position="start">
+                                <SearchIcon />                                                
+                            </InputAdornment>
+                        }
+                        placeholder="Search forum..."
+                        sx={{
+                            fontFamily: 'Lato',
+                        }}
+                        fullWidth
+                        value={inputValue}
+                                onChange={event => setInputValue(event.target.value)}
+                                onKeyPress={handleKeyPress}
+                    />
+                </InputLabel>                        
+
             </div>
                     
                 <IconButton
@@ -71,8 +75,10 @@ export default function Header(props) {
                     aria-controls={open ? 'account-menu' : undefined}
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
+                    aria-label="settings-button"
                 >
-                    <Avatar sx={{ width: 50, height: 50 }} src={props.avatarUrl} />
+                    <Avatar sx={{ width: 50, height: 50 }} src={props.avatarUrl} alt="settings-button"
+/>
                 </IconButton>
                 <Menu
                     anchorEl={anchorEl}

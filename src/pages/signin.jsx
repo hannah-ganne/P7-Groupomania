@@ -1,13 +1,12 @@
 import logo from '../assets/icon-left-font-monochrome-black.svg'
 import Button from '../components/Button'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
 import '../utils/style/signup.css'
 import { useForm } from "react-hook-form";
 
 export default function Signin() {
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
         const signinOptions = {
             method: 'POST',
@@ -51,6 +50,7 @@ export default function Signin() {
                     <h2>Sign in</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <input
+                            aria-label="input-email-address"
                             placeholder="Email Address"
                             type="email"
                             name="email"
@@ -60,6 +60,7 @@ export default function Signin() {
                         />
                         {errors?.email?.type === 'required' && <small>This field is required</small>}
                         <input
+                            aria-label="input-password"
                             type="password"
                             placeholder="Password"
                             name="password"
