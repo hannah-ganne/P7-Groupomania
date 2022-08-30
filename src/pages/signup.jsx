@@ -58,7 +58,6 @@ export default function Signup() {
 
             if(res.status === 409) {
                 setIsUnique(false)
-                console.log(isUnique)
             }
             throw new Error(`HTTP : ${res.status} - ${res.statusText}`)
         })
@@ -66,7 +65,6 @@ export default function Signup() {
             signinFirstTime()
         })
         .catch(err => console.log(err)); 
-    console.log(data)
     };
 
 
