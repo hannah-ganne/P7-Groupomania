@@ -155,7 +155,8 @@ export default function EditProfile() {
             }
             throw new Error(`There's an error sending the data`)
         })
-        .then (data => {
+            .then(data => {
+            sessionStorage.setItem('imageUrl', JSON.stringify(data.imageUrl) )
             document.location.href = './';
         })
         .catch(err => console.log(err)); 
