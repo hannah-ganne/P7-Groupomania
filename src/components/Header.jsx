@@ -30,6 +30,7 @@ export default function Header(props) {
     function handleKeyPress(event) {
         if (event.charCode === 13) {
             props.setKeyword(inputValue)
+            setInputValue('')
         }
     }
     
