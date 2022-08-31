@@ -9,16 +9,7 @@ export default function Home() {
 
     const [posts, setPosts] = useState([])
     const [keyword, setKeyword] = useState('')
-
-    const [mobileOpen, setMobileOpen] = useState(false);
-    const handleDrawerToggle = () => {
-        setMobileOpen(!mobileOpen);
-    };
-
-    const [department, setDepartment] = useState('')
-    const [topic, setTopic] = useState('')
-
-    useEffect(() => {
+        useEffect(() => {
         const fetchOptions = {
             method: 'GET',
             headers: {
@@ -43,7 +34,8 @@ export default function Home() {
         }
     }, [keyword])
 
-    useEffect(() => {
+    const [department, setDepartment] = useState('')
+        useEffect(() => {
         const fetchOptions = {
             method: 'GET',
             headers: {
@@ -66,8 +58,9 @@ export default function Home() {
             })
             .catch(err => console.log(err)); 
         }
-    }, [department])
-
+        }, [department])
+    
+    const [topic, setTopic] = useState('')
     useEffect(() => {
         const fetchOptions = {
             method: 'GET',
@@ -92,6 +85,11 @@ export default function Home() {
             .catch(err => console.log(err)); 
         }
     }, [topic])
+    
+    const [mobileOpen, setMobileOpen] = useState(false);
+    const handleDrawerToggle = () => {
+        setMobileOpen(!mobileOpen);
+    };
     
     return (
         <>
