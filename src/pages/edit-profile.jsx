@@ -58,8 +58,10 @@ export default function EditProfile() {
                 'Authorization': `Bearer ${JSON.parse(sessionStorage.getItem('token'))}`
             }
         }
+        
+        const userId = JSON.parse(sessionStorage.getItem('userId'))
 
-        fetch ('http://localhost:3000/api/auth/delete', fetchOptions)
+        fetch (`http://localhost:3000/api/auth/delete/${userId}`, fetchOptions)
         .then (res =>  {
             if(res.ok) {
                 return res.json();
