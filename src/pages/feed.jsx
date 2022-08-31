@@ -29,7 +29,7 @@ export default function Feed() {
             setPosts(data)
         })
         .catch(err => console.log(err)); 
-    }, [sortType])
+    }, [sortType, setPosts])
 
     useEffect(() => {
         const fetchOptions = {
@@ -54,7 +54,7 @@ export default function Feed() {
             })
             .catch(err => console.log(err)); 
         }
-    }, [department])
+    }, [department, setPosts])
 
     useEffect(() => {
         const fetchOptions = {
@@ -79,7 +79,7 @@ export default function Feed() {
             })
             .catch(err => console.log(err)); 
         }
-    }, [topic])
+    }, [topic, setPosts])
 
     const cardEl = posts.map(post => {
         return <Card
