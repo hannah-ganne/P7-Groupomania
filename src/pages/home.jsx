@@ -17,7 +17,6 @@ export default function Home() {
 
     const [department, setDepartment] = useState('')
     const [topic, setTopic] = useState('')
-    const [loadAll, setLoadAll] = useState(false)
 
     useEffect(() => {
         const fetchOptions = {
