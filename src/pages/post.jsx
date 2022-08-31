@@ -238,7 +238,7 @@ export default function Post() {
             </div>
             <div className="post-contents">
                 {data.post.imageUrl && <img src={data.post.imageUrl} alt="user selected file" />}
-                <p>{data.post.description}</p>
+                    <p style={{ whiteSpace: "pre-line" }}>{data.post.description}</p>
             </div>
             <Like
                 handleLike={handleLike}    
