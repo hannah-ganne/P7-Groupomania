@@ -13,27 +13,21 @@ import Modal from '@mui/material/Modal';
 export default function EditProfile() {
 
     const { data, setData, error, loading } = useFetch('GET', 'http://localhost:3000/api/auth/viewProfile')
-
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
     
     const [img, setImg] = useState();
-
     function onImageChange(e) {
         const [file] = e.target.files;
         setImg(URL.createObjectURL(file));
     }
 
+    function handleChange(event) {
+        const { name, value } = event.target
+        setData({ ...data, [name]: value })
+    }
+    
     const deptEl = departments.map(dept => {
         return <option key={dept.id} value={dept.label}>{dept.label}</option>
     })
-
-    function handleChange(event) {
-        const { name, value } = event.target
-
-        setData({ ...data, [name]: value })
-    }
 
     function handleCheckbox(index) {
         const isUpForArray = data.isUpFor.map((item, currentIndex) =>
@@ -45,9 +39,11 @@ export default function EditProfile() {
         setData(
             {...data, isUpFor: isUpForArray}
         )
-        
-        console.log(data.isUpFor)
     }
+    
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     function deleteAccount() {
         const fetchOptions = {
