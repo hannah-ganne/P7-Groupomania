@@ -12,7 +12,7 @@ export default function useFetch(method, url, body = null) {
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`,
+                "Authorization": `Bearer ${JSON.parse(sessionStorage.getItem("token"))}`
             },
             body: body
         }
@@ -27,7 +27,7 @@ export default function useFetch(method, url, body = null) {
                 setError(err);
                 setLoading(false);
             })
-    }, []);
+    }, [body, method, url]);
 
     return { data, setData, loading, error };
 };
