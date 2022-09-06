@@ -20,7 +20,6 @@ export default function EditPost() {
                 [name]: value
             }
         }))
-        console.log(data.post)
     }
 
     function handleSubmit(event) {

@@ -248,7 +248,6 @@ export default function Post() {
             />
             <div className="comments">
                 <form className="comment-input" onSubmit={handleSubmit}>
-                    {console.log(avatarUrl)}    
                     <Avatar src={avatarUrl} />
                     <input
                         aria-label="input-comment"    
