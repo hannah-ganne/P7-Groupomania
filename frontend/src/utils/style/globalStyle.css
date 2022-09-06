@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&display=swap');
+
+:root {
+    --primary-color: #FD2D01;
+    --secondary-color: #FFD7D7;
+    --tertiary-color: #4E5166;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: calc(12px + 0.390625vw);
+}
+
+
+
+*, *::before, *::after {
+    box-sizing: inherit;
+    outline-color: var(--secondary-color)
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    color: var(--tertiary-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body, input {
+    font-family: 'Lato', sans-serif;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+a {
+    text-decoration: none;
+    color: var(--tertiary-color);
+}
+
+
+h1, h2, h3, p {
+    margin: 0;
+}
+
+

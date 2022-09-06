@@ -1,0 +1,39 @@
+.main-header {
+    position: fixed;
+    left: 300px;
+    padding: 20px 40px;
+    width: calc(100% - 300px);
+    min-width: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 10;
+}
+
+.search-bar {
+    padding: 0 50px;
+    width: 70%;
+}
+
+.search-bar:focus {
+    outline: none;
+}
+
+.sidebar-toggle {
+    width: 25px;
+    visibility: hidden;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 900px) {
+    .main-header {
+        width: 100vw;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .sidebar-toggle {
+        visibility: visible;
+    }
+}
