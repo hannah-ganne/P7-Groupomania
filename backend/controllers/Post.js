@@ -195,8 +195,10 @@ exports.modifyPost = (req, res, next) => {
             if (post.userId === req.token.userId || req.token.isAdmin) {
                 let postObject;
                 if (req.file) {
-                    const filename = post.imageUrl.split('/images/')[1];
-                    fs.unlinkSync(`images/${filename}`);
+                    if (post.imageUrl) {
+                        const filename = post.imageUrl.split('/images/')[1];
+                        fs.unlinkSync(`images/${filename}`);
+                    }
 
                     postObject = {
                         ...req.body,
