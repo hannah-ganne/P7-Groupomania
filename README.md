@@ -2,6 +2,16 @@
 
 This is the front-end and back-end server for Project 7 of the Web Developer path.
 
+### Sign-up and Sign-in page ###
+![Groupomania mockup](https://user-images.githubusercontent.com/48105337/193148144-84d8b04e-3a15-4d37-abd4-a20109e1b860.png)
+
+### Homepage and error page ###
+![Groupomania mockup (1)](https://user-images.githubusercontent.com/48105337/193148401-d0b2f84f-51c8-47ea-8b2e-4d72e51e6989.png)
+
+### Post page ###
+![Groupomania mockup (2)](https://user-images.githubusercontent.com/48105337/193148520-59c4ed42-e8ec-422e-9344-e445742a4990.png)
+
+
 ## Back-end
 
 ### Back-end Prerequisites ###
