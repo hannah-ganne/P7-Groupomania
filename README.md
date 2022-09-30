@@ -1,6 +1,7 @@
 # Groupomania
 
 This is the front-end and back-end server for Project 7 of the Web Developer path.
+It is a corporate social media, intranet, with possibilities to post, modify, and delete posts, create, modify and delete personal profile, etc.
 
 ## Screenshots ##
 
